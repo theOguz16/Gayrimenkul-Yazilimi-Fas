@@ -14,6 +14,11 @@ import {
   faPlus,
   faPen,
   faSearch,
+  faTurkishLira,
+  faArrowDown,
+  faDownLong,
+  faMessage,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -29,5 +34,9 @@ library.add(
   faInfo,
   faPlus,
   faPen,
-  faSearch
+  faSearch,
+  faTurkishLira,
+  faDownLong,
+  faMessage,
+  faEnvelope
 );

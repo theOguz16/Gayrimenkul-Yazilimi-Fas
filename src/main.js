@@ -8,14 +8,14 @@ export const eventBus = new Vue();
 import "./assets/style.css";
 
 // Components
-// import InputText from "./components/forms/InputText.vue";
-// import InputButton from "./components/forms/InputButton.vue";
-// import InputDate from "./components/forms/InputDate.vue";
-// import InputSelect from "./components/forms/InputSelect.vue";
-// import InputTextarea from "./components/forms/InputTextarea.vue";
-// import InputFile from "./components/forms/InputFile.vue";
+import InputText from "./components/forms/InputText.vue";
+import InputButton from "./components/forms/InputButton.vue";
+import InputDate from "./components/forms/InputDate.vue";
+import InputSelect from "./components/forms/InputSelect.vue";
+import InputTextarea from "./components/forms/InputTextarea.vue";
+import InputFile from "./components/forms/InputFile.vue";
 
-// import Header from "./components/global/Header.vue";
+import Header from "./components/global/Header.vue";
 // import Search from "./components/global/Search.vue";
 // import ProfilSideBar from "./components/sidebar/ProfilSideBar.vue";
 
@@ -28,13 +28,12 @@ const app = createApp(App);
 
 app.use(router);
 app.mount("#app");
-app.component("fai", FontAwesomeIcon);
-// .component("InputText", InputText)
-// .component("InputFile", InputFile)
-// .component("InputButton", InputButton)
-// .component("InputDate", InputDate)
-// .component("InputSelect", InputSelect)
-// .component("InputTextarea", InputTextarea)
-// .component("Header", Header)
-// .component("Search", Search)
-// .component("ProfilSideBar", ProfilSideBar);
+app
+  .component("fai", FontAwesomeIcon)
+  .component("InputText", InputText)
+  .component("InputFile", InputFile)
+  .component("InputButton", InputButton)
+  .component("InputDate", InputDate)
+  .component("InputSelect", InputSelect)
+  .component("InputTextarea", InputTextarea)
+  .component("Header", Header);

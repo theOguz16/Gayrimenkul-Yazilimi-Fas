@@ -52,7 +52,7 @@ const props = defineProps({
         (element && element.error && element.error[field]
           ? 'theme-input-error'
           : 'theme-input',
-        'py-3 px-4 text-base border-2 rounded-[5px] outline-dark-purple')
+        'py-3 px-4 text-base border-2 rounded-[5px] outline-site-color-green')
       "
       :placeholder="placeholder"
       :type="type"

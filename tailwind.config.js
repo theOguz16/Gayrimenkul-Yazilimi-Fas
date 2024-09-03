@@ -12,10 +12,9 @@ module.exports = {
         "theme-primary": "#3f4257",
         "body-bg": "#EDF2F6",
         "body-color": "#757f8f",
-        "dark-pink": "#ad4699",
-        "dark-purple": "#7334a6",
-        "light-red": "#ff7994",
         "text-color": "#9ca3b2",
+        "site-color-green": "#76be36",
+        "site-color-dark": "#2c353d",
       },
     },
 
