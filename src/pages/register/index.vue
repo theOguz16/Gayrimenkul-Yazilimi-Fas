@@ -18,7 +18,7 @@ const genderList = {
   <div
     class="container flex mx-auto mt-14 bg-white p-0 gap-4 max-sm:flex-col max-lg:flex-col"
   >
-    <div id="image-container" class="">
+    <div id="image-container" class="flex items-center">
       <img src="image/fasimg.png" alt="login-image" />
     </div>
     <div

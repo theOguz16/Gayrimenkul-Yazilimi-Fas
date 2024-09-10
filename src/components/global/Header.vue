@@ -1,11 +1,9 @@
 <script setup></script>
 
 <template>
-  <header
-    class="bg-site-color-green flex items-center p-1 h-[70px] mb-20 max-sm:mb-0"
-  >
+  <header class="bg-site-color-green flex items-center p-1 h-[70px] mb-20">
     <div class="container">
-      <div class="flex items-center justify-between max-sm:text-center">
+      <div class="flex items-center justify-between">
         <div>
           <RouterLink to="/">
             <img class="w-[3.5rem]" src="/image/fas-logo.png" alt="Logo" />

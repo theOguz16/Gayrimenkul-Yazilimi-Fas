@@ -15,7 +15,7 @@ import Header from "@/components/global/Header.vue";
       </div>
       <div
         id="odeme-tarih"
-        class="flex items-center justify-center gap-[850px] mt-12 mb-12 max-sm:flex-col max-sm:gap-4 max-lg:gap-[272px]"
+        class="flex items-center justify-center gap-[850px] mt-12 mb-12 max-sm:flex-col max-sm:gap-4 max-lg:gap-[272px] max-2xl:gap-[541px]"
       >
         <div id="odeme">
           <div class="flex items-center gap-3">
