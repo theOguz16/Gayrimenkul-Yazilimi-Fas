@@ -1,9 +1,46 @@
+<script setup>
+import binaListesi from "@/data/binaListesi.json";
+</script>
 <script>
+import axios from "axios";
+import box from "@/store/box.js";
+
 export default {
   data() {
-    return {};
+    return {
+      buildName: "",
+      password: "",
+      user: {},
+    };
   },
-  methods: {},
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post("http://localhost:3000/login", {
+          buildName: this.buildName,
+          password: this.password,
+        });
+
+        if (response.status === 200) {
+          box.addSuccess("Tebrikler", "Giriş Başarılı!");
+          const token = response.data.token;
+          localStorage.setItem("token", token);
+          this.$router.push("/kira-panel");
+        } else {
+          box.addError("Üzgünüm", "Bir Hata Oluştu!");
+
+          console.error(
+            "Kimlik doğrulama başarısız. Sunucu cevabı: ",
+            response.data.message
+          );
+        }
+      } catch (error) {
+        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+
+        console.error("Bir hata oluştu:", error);
+      }
+    },
+  },
 };
 </script>
 <template>
@@ -18,12 +55,15 @@ export default {
             <h2 class="text-site-color-green text-center mb-4">Giriş Yap</h2>
           </div>
           <div>
-            <InputText
-              placeholder="Kullanıcı Adı"
-              type="text"
+            <InputSelect
+              :items="binaListesi"
+              itemKey="buildName"
+              itemValue="name"
+              label="Seçiniz(Bina)"
+              defaultOptions="Lütfen bir bina seçiniz"
+              v-model="buildName"
               required
-              v-model="username"
-            ></InputText>
+            ></InputSelect>
           </div>
           <div>
             <InputText

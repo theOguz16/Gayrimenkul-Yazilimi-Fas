@@ -21,6 +21,9 @@ const helpList = {
 };
 </script>
 <template>
+  <!-- mobil tasarım hatasını düzelt -->
+  <!-- şikayetlere tıklayınca çok büyük çıkıyor düzelt -->
+
   <Header></Header>
   <div class="container flex mt-14 bg-white p-0 gap-4 max-lg:flex-col">
     <div
@@ -36,9 +39,21 @@ const helpList = {
       <h3 class="mb-5 text-site-color-green text-center">İletişime Geç</h3>
       <form @submit.prevent="contactUs" class="grid grid-rows-3 gap-5">
         <div class="flex gap-5 max-sm:flex-col">
-          <InputText label="Ad" type="text" placeholder="Ad" required />
+          <InputText
+            label="Ad"
+            type="text"
+            placeholder="Ad"
+            required
+            v-model="formData.name"
+          />
 
-          <InputText label="Soyad" type="text" placeholder="Soyadı" required />
+          <InputText
+            label="Soyad"
+            type="text"
+            placeholder="Soyadı"
+            required
+            v-model="formData.surname"
+          />
         </div>
         <div class="flex gap-5 max-sm:flex-col">
           <InputText
@@ -46,24 +61,36 @@ const helpList = {
             type="email"
             placeholder="E-Posta Adresi"
             required
+            v-model="formData.emailAddres"
           />
           <InputText
             label="Telefon Numarası"
             type="tel"
             placeholder="Telefon Numarası"
             required
+            v-model="formData.telNo"
           />
         </div>
-        <div>
+        <div class="flex gap-5 max-sm:flex-col">
           <InputSelect
             :items="helpList"
             itemKey="value"
             itemValue="key"
             defaultOptions="Lütfen konu seçiniz"
             label="Seçiniz(Konu)"
-            requiredı
+            required
+            v-model="formdata.subject"
           >
           </InputSelect>
+          <InputSelect
+            :items="binaListesi"
+            itemKey="buildName"
+            itemValue="name"
+            label="Seçiniz(Bina)"
+            defaultOptions="Lütfen bir bina seçiniz"
+            v-model="formData.buildName"
+            required
+          ></InputSelect>
         </div>
         <div>
           <InputTextarea
@@ -71,6 +98,7 @@ const helpList = {
             cols="50"
             required
             label="Mesajınız Yazın"
+            v-model="formdata.message"
           ></InputTextarea>
         </div>
         <div class="mt-5">
@@ -85,9 +113,25 @@ const helpList = {
   </div>
 </template>
 <script>
+import { eventBus } from "@/main.js";
+import axiosInstance from "@/lib/axios";
+import box from "@/store/box.js";
+
 export default {
   data() {
-    return {};
+    return {
+      formData: {
+        buildName: "",
+        name: "",
+        surname: "",
+        message: "",
+        subject: "",
+        emailAddres: "",
+        telNo: "",
+        dirty: false,
+        error: {},
+      },
+    };
   },
 
   methods: {},

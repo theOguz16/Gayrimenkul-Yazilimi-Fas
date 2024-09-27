@@ -1,0 +1,5 @@
+1- Contact Sayfası Mobile Tasarım(Not alındı kod içinde) ve Contact Sayfası çalışması
+3- Admin-Panel sayfası mail ve sms ile iletişim
+4- Admin-Panel sayfası checkboxlar ve binalar listesindeki background renklerinin etkileşimleri
+5- DUYURU KISMI (BINADAKI ACİL DURUMLAR İÇİN DUYURU GEÇİLECEK)
+6- TUĞBERK ABININ YAPTIGI BOXLARDAN FRONTEND KISMINA YERLEŞTİR

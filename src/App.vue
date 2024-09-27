@@ -1,7 +1,8 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
+import { useRouter, RouterView } from "vue-router";
 
+const router = useRouter();
+</script>
 <template>
   <div class="container"></div>
   <RouterView />

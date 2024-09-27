@@ -9,3 +9,32 @@ import Header from "@/components/global/Header.vue";
     Selams
   </div>
 </template>
+<script>
+const router = useRouter();
+import { useRouter } from "vue-router";
+import axiosInstance from "@/lib/axios";
+export default {
+  data() {
+    return {
+      user: {},
+    };
+  },
+  methods: {},
+  async mounted() {
+    try {
+      const response = await axiosInstance.get("http://localhost:3000/profile");
+      this.user = response.data.user;
+      console.log(this.user.role);
+
+      // Rolüne göre yönlendirme
+      if (this.user.role == "Admin") {
+        router.push("/admin-panel"); // Adminse admin-panel sayfasına yönlendir
+      } else if (this.user.role == "User") {
+        router.push("/kira-panel"); // User ise kira-panel sayfasına yönlendir
+      }
+    } catch (error) {
+      console.error("Kullanıcı bilgileri alınamadı:", error);
+    }
+  },
+};
+</script>

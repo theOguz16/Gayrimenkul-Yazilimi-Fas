@@ -11,7 +11,10 @@
         </div>
         <div>
           <div class="flex gap-12 items-center">
-            <div class="m-1 relative inline-flex group ml-16">
+            <div
+              v-if="user?.role !== 'User'"
+              class="m-1 relative cursor-pointer inline-flex group ml-16"
+            >
               <button
                 id="hs-dropdown-hover-event"
                 type="button"
@@ -62,14 +65,15 @@
                   Giriş Yap
                 </RouterLink>
                 <RouterLink
+                  @click="logout"
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
-                  to="/logout"
+                  to="/login"
                 >
                   Çıkış Yap
                 </RouterLink>
               </div>
             </div>
-            <div class="m-1 relative inline-flex group">
+            <div class="m-1 relative cursor-pointer inline-flex group">
               <button
                 id="hs-dropdown-hover-event"
                 type="button"
@@ -120,6 +124,19 @@
                 >
                   İletişime Geç
                 </RouterLink>
+                <RouterLink
+                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  to="/login"
+                >
+                  Giriş Yap
+                </RouterLink>
+                <RouterLink
+                  @click="logout"
+                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  to="/login"
+                >
+                  Çıkış Yap
+                </RouterLink>
               </div>
             </div>
           </div>
@@ -128,3 +145,47 @@
     </div>
   </header>
 </template>
+<script>
+import axiosInstance from "@/lib/axios";
+
+export default {
+  data() {
+    return {
+      user: {},
+    };
+  },
+  methods: {
+    async logout() {
+      // Token'ı yerel depodan sil
+      localStorage.removeItem("token");
+
+      // Sunucuya çıkış isteği gönder (isteğe bağlı)
+      try {
+        const response = await axiosInstance.post(
+          "http://localhost:3000/logout"
+        );
+
+        if (response.status === 200) {
+          // Çıkış başarılı
+          console.log("Çıkış başarılı.");
+        } else {
+          console.error("Çıkış sırasında bir hata oluştu.");
+        }
+      } catch (error) {
+        console.error("Çıkış sırasında bir hata oluştu:", error);
+      }
+    },
+  },
+  async mounted() {
+    try {
+      // Backend'deki /profile endpoint'ine istek at
+      const response = await axiosInstance.get("http://localhost:3000/profile");
+
+      // Gelen kullanıcı bilgilerini state'e atıyoruz
+      this.user = response.data.user;
+    } catch (error) {
+      console.error("Kullanıcı bilgileri alınamadı:", error);
+    }
+  },
+};
+</script>

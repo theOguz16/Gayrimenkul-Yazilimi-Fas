@@ -1,4 +1,6 @@
 <script setup>
+import axiosInstance from "@/lib/axios";
+import box from "@/store/box.js";
 import Header from "@/components/global/Header.vue";
 </script>
 <template>
@@ -11,34 +13,44 @@ import Header from "@/components/global/Header.vue";
     >
       <div class="flex items-center gap-3">
         <p class="text-lg">Hoşgeldiniz</p>
-        <span class="text-black font-bold">{Ali Kuşçu}</span>
+        <span class="text-black font-bold"
+          >{{ user.name }} {{ user.surname }}</span
+        >
+      </div>
+      <div class="flex items-center gap-3">
+        <p class="text-lg">Bina Adı:</p>
+        <span class="text-black font-bold">{{ user.buildName }}</span>
       </div>
       <div
         id="odeme-tarih"
-        class="flex items-center justify-center gap-[850px] mt-12 mb-12 max-sm:flex-col max-sm:gap-4 max-lg:gap-[272px] max-2xl:gap-[541px]"
+        class="flex items-center justify-center gap-[835px] mt-12 mb-12 max-sm:flex-col max-sm:gap-4 max-lg:gap-[272px] max-2xl:gap-[541px]"
       >
         <div id="odeme">
           <div class="flex items-center gap-3">
             <p class="text-lg">Kira Miktarı:</p>
             <span class="text-black font-bold"
-              >1500 <fai icon="turkish-lira-sign"></fai
+              >{{ user.kiraMiktari }} <fai icon="turkish-lira-sign"></fai
             ></span>
           </div>
           <div class="flex items-center gap-3">
             <p class="text-lg">Aidat Miktarı:</p>
             <span class="text-black font-bold"
-              >150 <fai icon="turkish-lira-sign"></fai
+              >{{ user.aidatMiktari }} <fai icon="turkish-lira-sign"></fai
             ></span>
           </div>
         </div>
         <div id="tarih">
           <div class="flex items-center gap-3">
             <p class="text-lg">Kira Ödeme Tarihi:</p>
-            <span class="text-black font-bold">27.08.2024</span>
+            <span class="text-black font-bold">{{
+              formatTarih(user.kiraTarihi)
+            }}</span>
           </div>
           <div class="flex items-center gap-3">
             <p class="text-lg">Aidat Ödeme Tarihi:</p>
-            <span class="text-black font-bold">17.08.2024</span>
+            <span class="text-black font-bold">{{
+              formatTarih(user.aidatTarihi)
+            }}</span>
           </div>
         </div>
       </div>
@@ -65,7 +77,30 @@ export default {
     Binalar,
   },
   data() {
-    return {};
+    return {
+      user: {},
+    };
+  },
+  methods: {
+    formatTarih(tarih) {
+      const date = new Date(tarih);
+      return date.toLocaleDateString("tr-TR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+    },
+  },
+  async mounted() {
+    try {
+      // Backend'deki /profile endpoint'ine istek at
+      const response = await axiosInstance.get("http://localhost:3000/profile");
+
+      // Gelen kullanıcı bilgilerini state'e atıyoruz
+      this.user = response.data.user;
+    } catch (error) {
+      console.error("Kullanıcı bilgileri alınamadı:", error);
+    }
   },
 };
 </script>
