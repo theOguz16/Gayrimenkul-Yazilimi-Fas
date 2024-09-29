@@ -5,7 +5,7 @@ import binaListesi from "@/data/binaListesi.json";
 <template>
   <div class="flex flex-col bg-white rounded-[5px] w-full">
     <span
-      class="font-bold text-md text-theme-primary border-b-2 text-center py-6 block"
+      class="font-bold text-md text-site-color-dark border-b-2 text-center py-6 block"
       >Bina Listesi
     </span>
     <ul class="flex flex-col bg-white rounded-[5px] w-full">
@@ -17,7 +17,7 @@ import binaListesi from "@/data/binaListesi.json";
         <RouterLink
           :key="item.name"
           :to="`/binalar/${item.name}`"
-          class="font-bold text-sm text-theme-primary transition-all hover:text-site-color-green"
+          class="font-bold text-sm text-site-color-dark transition-all"
           >{{ item.name }}</RouterLink
         >
       </li>
@@ -105,6 +105,14 @@ export default {
       }
       setInterval(this.updateCheckboxes, 5000);
       setInterval(this.fetchBinaDurumlari, 5000);
+
+      // URL değiştiğinde sayfayı yenile
+      this.$watch(
+        () => this.$route.params,
+        () => {
+          window.location.reload();
+        }
+      );
 
       //NOT TUĞBERK ABININ YAPTIGI BOXLARDAN KOYARSAN SUPER OLUR
     } catch (error) {

@@ -3,28 +3,57 @@ import axiosInstance from "@/lib/axios";
 import Header from "@/components/global/Header.vue";
 </script>
 <template>
-  <Header></Header>
-  <div
-    class="container mt-6 flex gap-8 items-start justify-center flex-row max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center"
-  >
-    <div class="w-[30%] max-sm:w-full max-sm:p-8 max-lg:w-[50%]">
-      <Binalar></Binalar>
-    </div>
+  <div v-if="this.user.role === 'Admin'">
+    <Header></Header>
     <div
-      class="w-[70%] max-sm:w-full max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center"
+      class="container mt-6 flex gap-8 items-start justify-center flex-row max-sm:flex-col max-sm:text-center max-sm:items-center max-sm:justify-center"
     >
-      <div class="flex items-center gap-3">
-        <p class="text-lg">Hoşgeldiniz:</p>
-        <span class="text-black font-bold"
-          >{{ user.name }} {{ user.surname }}</span
-        >
+      <div class="w-[30%] max-sm:w-full max-sm:p-8 max-lg:w-[50%]">
+        <Binalar></Binalar>
       </div>
-      <div class="flex items-center gap-3">
-        <p class="text-lg">Kasadaki Para:</p>
-        <span class="text-black font-bold">
-          {{ toplamPara }}
-          <fai icon="turkish-lira-sign"></fai
-        ></span>
+      <div
+        class="w-[70%] max-sm:w-full max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center"
+      >
+        <div class="flex items-center gap-3">
+          <p class="text-lg">Hoşgeldiniz:</p>
+          <span class="text-black font-bold"
+            >{{ user.name }} {{ user.surname }}</span
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <p class="text-lg">Kasadaki Para:</p>
+          <span class="text-black font-bold">
+            {{ toplamPara }}
+            <fai icon="turkish-lira-sign"></fai
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    <div class="container">
+      <div class="flex justify-center gap-8 my-16 lg:flex-row sm:flex-col">
+        <div>
+          <h1 class="text-7xl text-site-color-dark">Oops!</h1>
+          <p class="w-[100%] font-medium text-2xl my-6 text-site-color-green">
+            Sanırım aradığını burada bulamadın.
+          </p>
+          <ul class="flex flex-col gap-6">
+            <span class="text-lg text-site-color-dark"
+              >Sana yardımcı olabilecek bağlantılar:</span
+            >
+            <li>
+              <router-link
+                class="text-base bg-dark-purple p-3 rounded-md transition-all text-site-color-green"
+                to="/"
+                >Ana Sayfa</router-link
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="w-[50%]">
+          <img src="public/image/fasimg.png" alt="404-img" />
+        </div>
       </div>
     </div>
   </div>
@@ -49,7 +78,6 @@ export default {
 
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = response.data.user;
-      console.log(this.user);
     } catch (error) {
       console.error("Kullanıcı bilgileri alınamadı:", error);
     }

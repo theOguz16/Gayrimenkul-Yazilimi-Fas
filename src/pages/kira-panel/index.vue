@@ -98,6 +98,11 @@ export default {
 
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = response.data.user;
+      console.log(this.user.role);
+      // Kullanıcı rolünü kontrol et
+      if (this.user.role === "Admin") {
+        this.$router.push("/admin-panel");
+      }
     } catch (error) {
       console.error("Kullanıcı bilgileri alınamadı:", error);
     }

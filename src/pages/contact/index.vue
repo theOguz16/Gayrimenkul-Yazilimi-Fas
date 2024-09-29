@@ -1,22 +1,16 @@
 <script setup>
-import Header from "@/components/global/Header.vue";
-
 const helpList = {
   istek: {
     key: "İstek Bildir",
-    value: 0,
   },
   sikayet: {
     key: "Şikayet Bildir",
-    value: 1,
   },
   odeme: {
     key: "Ödeme Hakkında Yardım Al",
-    value: 2,
   },
   yardim: {
     key: "FAS Hakkında Yardım Al",
-    value: 3,
   },
 };
 </script>
@@ -44,7 +38,7 @@ const helpList = {
             type="text"
             placeholder="Ad"
             required
-            v-model="formData.name"
+            v-model="name"
           />
 
           <InputText
@@ -52,7 +46,7 @@ const helpList = {
             type="text"
             placeholder="Soyadı"
             required
-            v-model="formData.surname"
+            v-model="surname"
           />
         </div>
         <div class="flex gap-5 max-sm:flex-col">
@@ -61,25 +55,25 @@ const helpList = {
             type="email"
             placeholder="E-Posta Adresi"
             required
-            v-model="formData.emailAddres"
+            v-model="emailAddres"
           />
           <InputText
             label="Telefon Numarası"
             type="tel"
             placeholder="Telefon Numarası"
             required
-            v-model="formData.telNo"
+            v-model="telNo"
           />
         </div>
         <div class="flex gap-5 max-sm:flex-col">
           <InputSelect
-            :items="helpList"
-            itemKey="value"
+            :items="Object.values(helpList)"
+            itemKey="key"
             itemValue="key"
             defaultOptions="Lütfen konu seçiniz"
             label="Seçiniz(Konu)"
             required
-            v-model="formdata.subject"
+            v-model="subject"
           >
           </InputSelect>
           <InputSelect
@@ -88,8 +82,8 @@ const helpList = {
             itemValue="name"
             label="Seçiniz(Bina)"
             defaultOptions="Lütfen bir bina seçiniz"
-            v-model="formData.buildName"
             required
+            v-model="buildName"
           ></InputSelect>
         </div>
         <div>
@@ -98,7 +92,7 @@ const helpList = {
             cols="50"
             required
             label="Mesajınız Yazın"
-            v-model="formdata.message"
+            v-model="message"
           ></InputTextarea>
         </div>
         <div class="mt-5">
@@ -113,27 +107,53 @@ const helpList = {
   </div>
 </template>
 <script>
-import { eventBus } from "@/main.js";
 import axiosInstance from "@/lib/axios";
 import box from "@/store/box.js";
+import binaListesi from "@/data/binaListesi.json";
 
 export default {
   data() {
     return {
-      formData: {
-        buildName: "",
-        name: "",
-        surname: "",
-        message: "",
-        subject: "",
-        emailAddres: "",
-        telNo: "",
-        dirty: false,
-        error: {},
-      },
+      message: "",
+      buildName: "",
+      name: "",
+      surname: "",
+      subject: "",
+      telNo: "",
+      emailAddres: "",
     };
   },
 
-  methods: {},
+  methods: {
+    // async duyuruOlustur() {
+    //   try {
+    //     // Seçilen bina isimleri ile e-posta adreslerini almak için backend'e istek at
+    //     const response = await axiosInstance.post(
+    //       "http://localhost:3000/get-emails",
+    //       {
+    //         buildings: this.selectedBuildings,
+    //       }
+    //     );
+    //     this.selectedUsers = response.data.emails; // Backend'den alınan e-posta adreslerini sakla
+    //     if (this.uyariTuruSecim === "E-Posta ile Uyar") {
+    //       // E-posta ile uyarı gönderme işlemi
+    //       for (const email of this.selectedUsers) {
+    //         await axiosInstance.post("http://localhost:3000/duyuru-email", {
+    //           email: [email],
+    //           subject: this.duyuruBasligi,
+    //           message: this.duyuruAciklamasi,
+    //         });
+    //       }
+    //       box.addSuccess("Tebrikler", "E-Posta ile Duyuru İletimi Başarılı!");
+    //     }
+    //   } catch (error) {
+    //     console.error("E-posta gönderilirken bir hata oluştu:", error);
+    //     box.addError("Üzgünüm", "Bir Hata Oluştu!");
+    //   } finally {
+    //     // Sayfayı yenile
+    //     location.reload();
+    //   }
+    // },
+  },
 };
 </script>

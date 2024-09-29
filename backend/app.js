@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const nodemailer = require("nodemailer");
 const path = require("path");
 const app = express();
 const bodyParser = require("body-parser");
@@ -270,6 +271,85 @@ app.post("/binalar/:bina/aidatCheckbox", middlewareAuth, async (req, res) => {
   }
 });
 
+app.post("/send-email", async (req, res) => {
+  const { email, subject, message } = req.body;
+
+  // Nodemailer transporter ayarları
+  let transporter = nodemailer.createTransport({
+    host: "mail.fatherandsons.eu", // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
+    port: 465, // Genellikle SSL için 465, TLS için 587 kullanılır
+    secure: true, // true for SSL (465 portu), false for TLS (587 portu)
+    auth: {
+      user: "contact@fatherandsons.eu", // Kendi domain email adresiniz
+      pass: "?(]K@ctDyR{R", // E-posta adresiniz için oluşturduğunuz şifre
+    },
+  });
+
+  try {
+    // Mail gönderimi
+    await transporter.sendMail({
+      from: '"FAS" <contact@fatherandsons.eu>', // Kimden
+      to: email, // Kime (kullanıcının email adresi)
+      subject: subject, // Konu
+      text: message, // Mesaj
+    });
+
+    res.status(200).json({ message: "Email başarıyla gönderildi!" });
+  } catch (error) {
+    console.error("Email gönderim hatası:", error);
+    res
+      .status(500)
+      .json({ message: "Email gönderiminde bir hata oluştu.", error });
+  }
+});
+//Duyuruları e-mail ile
+app.post("/duyuru-email", async (req, res) => {
+  const { email, subject, message } = req.body;
+
+  // Nodemailer transporter ayarları
+  let transporter = nodemailer.createTransport({
+    host: "mail.fatherandsons.eu", // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
+    port: 465, // Genellikle SSL için 465, TLS için 587 kullanılır
+    secure: true, // true for SSL (465 portu), false for TLS (587 portu)
+    auth: {
+      user: "contact@fatherandsons.eu", // Kendi domain email adresiniz
+      pass: "?(]K@ctDyR{R", // E-posta adresiniz için oluşturduğunuz şifre
+    },
+  });
+
+  try {
+    // Mail gönderimi
+    await transporter.sendMail({
+      from: '"FAS" <contact@fatherandsons.eu>', // Kimden
+      to: email, // Kime (kullanıcının email adresi)
+      subject: subject, // Konu
+      text: message, // Mesaj
+    });
+
+    res.status(200).json({ message: "Email başarıyla gönderildi!" });
+  } catch (error) {
+    console.error("Email gönderim hatası:", error);
+    res
+      .status(500)
+      .json({ message: "Email gönderiminde bir hata oluştu.", error });
+  }
+});
+
+//E-postaları bulmak için
+app.post("/get-emails", middlewareAuth, async (req, res) => {
+  const { buildings } = req.body; // İstek gövdesinden bina isimlerini al
+  try {
+    // Bina isimlerine göre kullanıcıları bul
+    const users = await User.find({ buildName: { $in: buildings } });
+
+    // Kullanıcıların e-posta adreslerini çıkar
+    const emails = users.map((user) => user.emailAddres);
+    return res.json({ emails });
+  } catch (error) {
+    console.error("Hata:", error);
+    return res.status(500).json({ message: "Sunucu hatası" });
+  }
+});
 //BINA EKLE KISMI YAP
 
 // app.post("/soru-ekle", async (req, res) => {

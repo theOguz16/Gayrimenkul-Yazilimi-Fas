@@ -54,9 +54,15 @@
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  to="/announcement"
+                >
+                  Duyurular
+                </RouterLink>
+                <RouterLink
+                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/register"
                 >
-                  Kayıt Ol
+                  Kayıt Oluştur
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
@@ -73,7 +79,10 @@
                 </RouterLink>
               </div>
             </div>
-            <div class="m-1 relative cursor-pointer inline-flex group">
+            <div
+              v-if="user?.role !== 'Admin'"
+              class="m-1 relative cursor-pointer inline-flex group"
+            >
               <button
                 id="hs-dropdown-hover-event"
                 type="button"
@@ -112,6 +121,7 @@
                 >
                   Kira Yönetimi
                 </RouterLink>
+
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/payment"
@@ -147,6 +157,7 @@
 </template>
 <script>
 import axiosInstance from "@/lib/axios";
+import box from "@/store/box.js";
 
 export default {
   data() {
@@ -168,11 +179,14 @@ export default {
         if (response.status === 200) {
           // Çıkış başarılı
           console.log("Çıkış başarılı.");
+          box.addSuccess("Tebrikler", "Çıkış Başarılı!");
         } else {
           console.error("Çıkış sırasında bir hata oluştu.");
+          box.addError("Üzgünüm", "Bir Hata Oluştu!");
         }
       } catch (error) {
         console.error("Çıkış sırasında bir hata oluştu:", error);
+        box.addError("Üzgünüm", "Bir Hata Oluştu!");
       }
     },
   },

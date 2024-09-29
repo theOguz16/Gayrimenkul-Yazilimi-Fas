@@ -4,7 +4,6 @@ import binaListesi from "@/data/binaListesi.json";
 <script>
 import axios from "axios";
 import box from "@/store/box.js";
-
 export default {
   data() {
     return {
@@ -13,6 +12,7 @@ export default {
       user: {},
     };
   },
+
   methods: {
     async login() {
       try {
@@ -70,6 +70,7 @@ export default {
               placeholder="Şifre"
               type="password"
               required
+              label="Şifre"
               v-model="password"
             ></InputText>
           </div>
@@ -79,14 +80,6 @@ export default {
               type="submit"
               text="Giriş Yap"
             ></InputButton>
-          </div>
-          <div id="register" class="mt-2">
-            <p class="text-sm">
-              Henüz kayıt olmadın mı ?
-              <router-link class="text-site-color-green" to="/register"
-                >Kayıt Ol!</router-link
-              >
-            </p>
           </div>
         </form>
       </div>
