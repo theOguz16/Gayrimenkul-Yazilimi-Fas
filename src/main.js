@@ -1,34 +1,43 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import { createI18n } from "vue-i18n";
 
-export const eventBus = new Vue();
-
-//css
+// CSS
 import "./assets/style.css";
 
-// Components
+// Diller
+import * as en from "../language/en.yaml";
+import * as tr from "../language/tr.yaml";
+
+// Vue i18n kurulum
+const i18n = createI18n({
+  locale: "tr",
+  messages: {
+    en: en.default,
+    tr: tr.default,
+  },
+});
+
+// Bileşenler
 import InputText from "./components/forms/InputText.vue";
 import InputButton from "./components/forms/InputButton.vue";
 import InputDate from "./components/forms/InputDate.vue";
 import InputSelect from "./components/forms/InputSelect.vue";
 import InputTextarea from "./components/forms/InputTextarea.vue";
 import InputFile from "./components/forms/InputFile.vue";
-
 import Header from "./components/global/Header.vue";
-// import Search from "./components/global/Search.vue";
-// import ProfilSideBar from "./components/sidebar/ProfilSideBar.vue";
 
-//font-awesome
+// Font Awesome
 import "@/lib/fontAwesome";
 import "@/lib/fontAwesomeRegular";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const app = createApp(App);
 
-app.use(router);
-app.mount("#app");
 app
+  .use(i18n)
+  .use(router)
   .component("fai", FontAwesomeIcon)
   .component("InputText", InputText)
   .component("InputFile", InputFile)
@@ -36,4 +45,5 @@ app
   .component("InputDate", InputDate)
   .component("InputSelect", InputSelect)
   .component("InputTextarea", InputTextarea)
-  .component("Header", Header);
+  .component("Header", Header)
+  .mount("#app");

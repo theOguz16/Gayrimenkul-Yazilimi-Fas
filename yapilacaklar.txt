@@ -1,10 +1,22 @@
+NOT:
+Mailler bazen buga giriyor öyle olunca env dosyasından çekme manuel olarak elle yaz daha sonra tekrar env ile yaz
+
+ÖNCELİKLİ YAPILACAKLAR: 
+2- Backend kodlarını düzenle klasor klasor
+3- mail şifersini env dosyasına sakla
+
+SMS İŞLERİ:
 1- Contact Sayfası iletişim formunun oluştuğuna dair bir sms gelsin sonrasında maili kontrol et desin
-3- Admin-Panel sayfası sms ile iletişim
-4- Admin-Panel'de user rol karışıyor
-5- DUYURU KISMI sms
-6- TUĞBERK ABININ YAPTIGI BOXLARDAN FRONTEND KISMINA YERLEŞTİR(şimdilik yapıldı yeni gelen şeylere eklenmeli)
-7- ODEME SAYFASI
-8- Register sayfasına rolü User olanlar giremesin
-9- Sitenin ingilizce hali de lazım
-10- Backend kodlarını düzenle klasor klasor
-11- Mail için falan env dosyasını kullan
+2- Admin-Panel sayfası sms ile iletişim
+3- DUYURU KISMI sms
+
+ROL İŞLERİ:
+1- Register sayfasına rolü User olanlar giremesin
+2- Admin-Panel'de user rol karışıyor
+
+ÖNCELİKLİ OLMAYAN İŞLER:
+1- TUĞBERK ABININ YAPTIGI BOXLARDAN FRONTEND KISMINA YERLEŞTİR(şimdilik yapıldı yeni gelen şeylere eklenmeli)
+2- ODEME SAYFASI
+3- Yabancı diller için klasor olusturuldu onun üstüne ekleme yapacağım
+
+

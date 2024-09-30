@@ -9,6 +9,10 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const port = process.env.PORT;
 const secretkey = process.env.SECRET_KEY;
+const mail_port = process.env.MAIL_PORT;
+const secure = process.env.SECURE;
+const host = process.env.HOST;
+const admin_mail = process.env.ADMIN_MAIL;
 
 const middlewareAuth = require("./middlewares/auth");
 
@@ -276,19 +280,19 @@ app.post("/send-email", async (req, res) => {
 
   // Nodemailer transporter ayarları
   let transporter = nodemailer.createTransport({
-    host: "mail.fatherandsons.eu", // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
-    port: 465, // Genellikle SSL için 465, TLS için 587 kullanılır
-    secure: true, // true for SSL (465 portu), false for TLS (587 portu)
+    host: `${host}`, // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
+    port: mail_port, // Genellikle SSL için 465, TLS için 587 kullanılır
+    secure: secure, // true for SSL (465 portu), false for TLS (587 portu)
     auth: {
-      user: "contact@fatherandsons.eu", // Kendi domain email adresiniz
-      pass: "?(]K@ctDyR{R", // E-posta adresiniz için oluşturduğunuz şifre
+      user: `${admin_mail}`, // Kendi domain email adresiniz
+      pass: "8Fw{}+L%9~aS", // E-posta adresiniz için oluşturduğunuz şifre
     },
   });
 
   try {
     // Mail gönderimi
     await transporter.sendMail({
-      from: '"FAS" <contact@fatherandsons.eu>', // Kimden
+      from: `"FAS" <${admin_mail}>`, // Kimden
       to: email, // Kime (kullanıcının email adresi)
       subject: subject, // Konu
       text: message, // Mesaj
@@ -308,19 +312,19 @@ app.post("/duyuru-email", async (req, res) => {
 
   // Nodemailer transporter ayarları
   let transporter = nodemailer.createTransport({
-    host: "mail.fatherandsons.eu", // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
-    port: 465, // Genellikle SSL için 465, TLS için 587 kullanılır
-    secure: true, // true for SSL (465 portu), false for TLS (587 portu)
+    host: `${host}`, // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
+    port: mail_port, // Genellikle SSL için 465, TLS için 587 kullanılır
+    secure: secure, // true for SSL (465 portu), false for TLS (587 portu)
     auth: {
-      user: "contact@fatherandsons.eu", // Kendi domain email adresiniz
-      pass: "?(]K@ctDyR{R", // E-posta adresiniz için oluşturduğunuz şifre
+      user: `${admin_mail}`, // Kendi domain email adresiniz
+      pass: "8Fw{}+L%9~aS", // E-posta adresiniz için oluşturduğunuz şifre
     },
   });
 
   try {
     // Mail gönderimi
     await transporter.sendMail({
-      from: '"FAS" <contact@fatherandsons.eu>', // Kimden
+      from: `"FAS" <${admin_mail}>`, // Kimden
       to: email, // Kime (kullanıcının email adresi)
       subject: subject, // Konu
       text: message, // Mesaj
@@ -340,19 +344,19 @@ app.post("/contact-email", async (req, res) => {
     req.body;
 
   let transporter = nodemailer.createTransport({
-    host: "mail.fatherandsons.eu", // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
-    port: 465, // Genellikle SSL için 465, TLS için 587 kullanılır
-    secure: true, // true for SSL (465 portu), false for TLS (587 portu)
+    host: `${host}`, // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
+    port: mail_port, // Genellikle SSL için 465, TLS için 587 kullanılır
+    secure: secure, // true for SSL (465 portu), false for TLS (587 portu)
     auth: {
-      user: "contact@fatherandsons.eu", // Kendi domain email adresiniz
-      pass: "?(]K@ctDyR{R", // E-posta adresiniz için oluşturduğunuz şifre
+      user: `${admin_mail}`, // Kendi domain email adresiniz
+      pass: "8Fw{}+L%9~aS", // E-posta adresiniz için oluşturduğunuz şifre
     },
   });
 
   const mailOptions = {
-    from: `"${name} ${surname}" <contact@fatherandsons.eu>`, // Kullanıcının adını gösteriyoruz, ama gönderici admin maili
+    from: `"${name} ${surname}" <${admin_mail}>`, // Kullanıcının adını gösteriyoruz, ama gönderici admin maili
     replyTo: emailAddres, // Yanıt adresi kullanıcı e-postası
-    to: "contact@fatherandsons.eu", // Admin e-postası
+    to: `${admin_mail}`, // Admin e-postası
     subject: `Yeni İletişim Mesajı: ${subject}`,
     text: `
       İsim: ${name} ${surname}
@@ -386,143 +390,6 @@ app.post("/get-emails", middlewareAuth, async (req, res) => {
     return res.status(500).json({ message: "Sunucu hatası" });
   }
 });
-//BINA EKLE KISMI YAP
-
-// app.post("/soru-ekle", async (req, res) => {
-//   try {
-//     //  Gelen verileri kullanarak yeni bir soru nesnesi oluşturun
-//     const yeniSoru = new Soru({
-//       soruBasligi: req.body.title,
-//       soruAciklamasi: req.body.explain,
-//       konu: req.body.konuListesi,
-//       imageUrl: req.body.img,
-//       likeCount: req.body.likeCount,
-//       isLiked: req.body.isLiked,
-//       yorumCount: req.body.yorumCount,
-//       isCommanted: req.body.isCommanted,
-//       username: req.body.username,
-//       token: req.body.token, // Kullanıcının token'ını ekleyin
-//       yorumlar: [
-//         // {
-//         //   type: Schema.Types.ObjectId,
-//         //   ref: "Yorum", // 'Yorum' modeline referans veriyoruz
-//         // },
-//       ],
-//     });
-
-//     // const oturumKimligi = req.body.token;
-//     // const kullaniciAdi = req.body.username;
-//     // console.log(oturumKimligi, kullaniciAdi);
-
-//     //  Soruyu veritabanına kaydedin
-//     await yeniSoru.save();
-
-//     // Bu kod kullanıcının sorularına ekler
-//     const user = await User.findOne({ username: req.body.username });
-//     user.sorulanSoru++;
-
-//     if (user) {
-//       user.addSoru(yeniSoru._id);
-//     }
-
-//     res.status(201).json({ mesaj: "Soru başarıyla kaydedildi." });
-//   } catch (error) {
-//     console.error("Soru kaydetme hatası:", error);
-//     res.status(500).json({ hata: "Soru kaydedilirken bir hata oluştu." });
-//   }
-// });
-
-//BACKENDDE BINALARA BAK
-
-//Ana sayfaya tüm verileri getirme
-// app.get("/sorular", async (req, res) => {
-//   try {
-//     // Veritabanından tüm soruları çekin
-//     const sorular = await Soru.find({});
-//     res.status(200).json(sorular);
-
-//     const sorularWUsername = sorular.filter((soru) => ({
-//       ...soru._doc,
-//       username: soru.username,
-//     }));
-
-//     // Kullanıcının adına göre tüm soruları bulun
-//     // console.log("sorularwidth" + sorularWUsername);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ hata: "Soruları alma sırasında bir hata oluştu." });
-//   }
-// });
-// app.get("/soru/:soruID", async (req, res) => {
-//   const soruID = req.params.soruID;
-//   // SoruID'ye ait sorunun ayrıntılarını veritabanından çekmek için "populate" kullanın
-//   const soru = await Soru.findById(soruID);
-//   if (soru) {
-//     // Kullanıcı adı ve token gibi ek bilgileri istemciye gönderin
-//     res.status(200).json({
-//       soru: soru,
-//       username: soru.username,
-//       token: soru.token,
-//     });
-//   } else {
-//     res.status(404).json({ hata: "Soru bulunamadı." });
-//   }
-// });
-
-//BİNA SİL
-// app.delete("/sorular/:soruID", async (req, res) => {
-//   try {
-//     const soruID = req.params.soruID;
-//     // const { username } = req.body;
-//     // const username = req.body.username;
-
-//     const user = await User.findOne({ username: req.body.username });
-//     user.sorulanSoru--;
-
-//     user.Sorular.pull(soruID);
-
-//     await user.save();
-
-//     // MongoDB'den soruyu silmek için gerekli sorguyu çalıştırın
-//     const silinenSoru = await Soru.findByIdAndDelete(soruID);
-
-//     // Silinen sorunun bağlantılı yorumlarını alın
-//     const baglantiliYorum = silinenSoru.yorumlar;
-
-//     // Bağlantılı yorumları silebilirsiniz
-//     for (const yorumID of baglantiliYorum) {
-//       await Yorum.findByIdAndDelete(yorumID);
-//     }
-
-//     // Eğer soru kullanıcının sahip olduğu bir soru ise, silinmesine izin verin
-//     if (req.username === req.user.username) {
-//       // Soruyu veritabanından silin
-//       await Soru.findByIdAndDelete(soruID);
-//       return res.json({ mesaj: "Soru başarıyla silindi." });
-//     } else {
-//       return res.status(403).json({ hata: "Bu soruyu silme izniniz yok." });
-//     }
-
-//     res.status(204).send(); // Başarılı yanıt, içerik olmadan (No Content)
-//   } catch (error) {
-//     console.error("Soru silme hatası:", error);
-//     res.status(500).json({ error: "Soru silinemedi." });
-//   }
-// });
-
-//BINADAKI UYELER
-
-// app.get("/bina-uyeleri/:buildName", async (req, res) => {
-//   try {
-//     const buildName = req.params.buildName;
-//     // Veritabanından konuya göre filtrelenmiş userlari çekin
-//     const users = await User.find({ buildName: buildName });
-//     res.status(200).json(users);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ hata: "Useri alma sırasında bir hata oluştu." });
-//   }
-// });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
