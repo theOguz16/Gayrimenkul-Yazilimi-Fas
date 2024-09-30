@@ -334,6 +334,42 @@ app.post("/duyuru-email", async (req, res) => {
       .json({ message: "Email gönderiminde bir hata oluştu.", error });
   }
 });
+//contact e-mail ile
+app.post("/contact-email", async (req, res) => {
+  const { name, surname, emailAddres, telNo, subject, buildName, message } =
+    req.body;
+
+  let transporter = nodemailer.createTransport({
+    host: "mail.fatherandsons.eu", // Hosting sağlayıcınızdan alacağınız SMTP sunucusu
+    port: 465, // Genellikle SSL için 465, TLS için 587 kullanılır
+    secure: true, // true for SSL (465 portu), false for TLS (587 portu)
+    auth: {
+      user: "contact@fatherandsons.eu", // Kendi domain email adresiniz
+      pass: "?(]K@ctDyR{R", // E-posta adresiniz için oluşturduğunuz şifre
+    },
+  });
+
+  const mailOptions = {
+    from: `"${name} ${surname}" <contact@fatherandsons.eu>`, // Kullanıcının adını gösteriyoruz, ama gönderici admin maili
+    replyTo: emailAddres, // Yanıt adresi kullanıcı e-postası
+    to: "contact@fatherandsons.eu", // Admin e-postası
+    subject: `Yeni İletişim Mesajı: ${subject}`,
+    text: `
+      İsim: ${name} ${surname}
+      E-Posta: ${emailAddres}
+      Telefon: ${telNo}
+      Bina: ${buildName}
+      Mesaj: ${message}
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send("E-posta başarıyla gönderildi!");
+  } catch (error) {
+    res.status(500).send("E-posta gönderilirken bir hata oluştu.");
+  }
+});
 
 //E-postaları bulmak için
 app.post("/get-emails", middlewareAuth, async (req, res) => {

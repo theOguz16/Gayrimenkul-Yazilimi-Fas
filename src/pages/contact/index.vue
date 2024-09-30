@@ -125,35 +125,31 @@ export default {
   },
 
   methods: {
-    // async duyuruOlustur() {
-    //   try {
-    //     // Seçilen bina isimleri ile e-posta adreslerini almak için backend'e istek at
-    //     const response = await axiosInstance.post(
-    //       "http://localhost:3000/get-emails",
-    //       {
-    //         buildings: this.selectedBuildings,
-    //       }
-    //     );
-    //     this.selectedUsers = response.data.emails; // Backend'den alınan e-posta adreslerini sakla
-    //     if (this.uyariTuruSecim === "E-Posta ile Uyar") {
-    //       // E-posta ile uyarı gönderme işlemi
-    //       for (const email of this.selectedUsers) {
-    //         await axiosInstance.post("http://localhost:3000/duyuru-email", {
-    //           email: [email],
-    //           subject: this.duyuruBasligi,
-    //           message: this.duyuruAciklamasi,
-    //         });
-    //       }
-    //       box.addSuccess("Tebrikler", "E-Posta ile Duyuru İletimi Başarılı!");
-    //     }
-    //   } catch (error) {
-    //     console.error("E-posta gönderilirken bir hata oluştu:", error);
-    //     box.addError("Üzgünüm", "Bir Hata Oluştu!");
-    //   } finally {
-    //     // Sayfayı yenile
-    //     location.reload();
-    //   }
-    // },
+    async contactUs() {
+      try {
+        await axiosInstance.post("http://localhost:3000/contact-email", {
+          name: this.name,
+          surname: this.surname,
+          emailAddres: this.emailAddres,
+          telNo: this.telNo,
+          subject: this.subject,
+          buildName: this.buildName,
+          message: this.message,
+        });
+        box.addSuccess("Tebrikler!", "İletişim Formu Başarıyla İletildi");
+      } catch (error) {
+        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        console.error(error);
+      } finally {
+        this.name = "";
+        this.surname = "";
+        this.emailAddres = "";
+        this.subject = "";
+        this.telNo = "";
+        this.buildName = "";
+        this.message = "";
+      }
+    },
   },
 };
 </script>

@@ -1,7 +1,7 @@
-1- Contact Sayfası Mobile Tasarım(Not alındı kod içinde) ve Contact Sayfası çalışması
+1- Contact Sayfası iletişim formunun oluştuğuna dair bir sms gelsin sonrasında maili kontrol et desin
 3- Admin-Panel sayfası sms ile iletişim
 4- Admin-Panel'de user rol karışıyor
-5- DUYURU KISMI BACKEND
+5- DUYURU KISMI sms
 6- TUĞBERK ABININ YAPTIGI BOXLARDAN FRONTEND KISMINA YERLEŞTİR(şimdilik yapıldı yeni gelen şeylere eklenmeli)
 7- ODEME SAYFASI
 8- Register sayfasına rolü User olanlar giremesin
