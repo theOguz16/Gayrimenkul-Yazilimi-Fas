@@ -5,9 +5,7 @@ import Header from "@/components/global/Header.vue";
   <Header></Header>
   <div
     class="container mt-6 flex gap-8 items-start justify-center flex-row max-sm:p-4 max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:text-center max-lg:flex-col"
-  >
-    Selams
-  </div>
+  ></div>
 </template>
 <script>
 const router = useRouter();
@@ -24,13 +22,12 @@ export default {
     try {
       const response = await axiosInstance.get("http://localhost:3000/profile");
       this.user = response.data.user;
-      console.log(this.user.role);
 
       // Rolüne göre yönlendirme
       if (this.user.role == "Admin") {
-        router.push("/admin-panel"); // Adminse admin-panel sayfasına yönlendir
+        this.$router.push("/admin-panel"); // Adminse admin-panel sayfasına yönlendir
       } else if (this.user.role == "User") {
-        router.push("/kira-panel"); // User ise kira-panel sayfasına yönlendir
+        this.$router.push("/kira-panel"); // User ise kira-panel sayfasına yönlendir
       }
     } catch (error) {
       console.error("Kullanıcı bilgileri alınamadı:", error);

@@ -3,16 +3,11 @@ Mailler bazen buga giriyor öyle olunca env dosyasından çekme manuel olarak el
 
 ÖNCELİKLİ YAPILACAKLAR: 
 2- Backend kodlarını düzenle klasor klasor
-3- mail şifersini env dosyasına sakla
 
 SMS İŞLERİ:
 1- Contact Sayfası iletişim formunun oluştuğuna dair bir sms gelsin sonrasında maili kontrol et desin
 2- Admin-Panel sayfası sms ile iletişim
 3- DUYURU KISMI sms
-
-ROL İŞLERİ:
-1- Register sayfasına rolü User olanlar giremesin
-2- Admin-Panel'de user rol karışıyor
 
 ÖNCELİKLİ OLMAYAN İŞLER:
 1- TUĞBERK ABININ YAPTIGI BOXLARDAN FRONTEND KISMINA YERLEŞTİR(şimdilik yapıldı yeni gelen şeylere eklenmeli)

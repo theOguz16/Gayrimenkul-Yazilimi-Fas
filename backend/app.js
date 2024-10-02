@@ -13,6 +13,7 @@ const mail_port = process.env.MAIL_PORT;
 const secure = process.env.SECURE;
 const host = process.env.HOST;
 const admin_mail = process.env.ADMIN_MAIL;
+const admin_pass = process.env.ADMIN_PASS;
 
 const middlewareAuth = require("./middlewares/auth");
 
@@ -35,41 +36,9 @@ app.get("/profile", middlewareAuth, async function (req, res) {
   });
 });
 
-// Örnek özel bir rotaya erişim (test)
-app.get("/private-route", middlewareAuth, (req, res) => {
-  // Eğer middleware JWT token'ı doğrulamışsa, bu kod çalışır
-  res.json({ message: "Bu özel rotaya erişim sağlandı.", user: req.user });
-});
-
-// JWT doğrulama middleware'i
-function authenticateJWT(req, res, next) {
-  const token = req.header("x-auth-token"); // veya başka bir header adı
-  if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Erişim yetkiniz yok. JWT token eksik." });
-  }
-
-  jwt.verify(token, secretkey, (err, user) => {
-    if (err) {
-      return res
-        .status(403)
-        .json({ message: "Erişim yetkiniz yok. Geçersiz token." });
-    }
-    req.user = user; // İstek nesnesine kullanıcı bilgilerini ekleyin
-    next();
-  });
-}
-
 const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/FAS"; // MongoDB URI
 const client = new MongoClient(uri);
-
-// JWT oluşturmak için işlev
-function generateToken(buildName) {
-  const payload = { buildName };
-  return jwt.sign(payload, secretkey, { expiresIn: "1h" });
-}
 
 // Şema tanımlanmış yerin yolunu ekleyin
 
@@ -285,7 +254,7 @@ app.post("/send-email", async (req, res) => {
     secure: secure, // true for SSL (465 portu), false for TLS (587 portu)
     auth: {
       user: `${admin_mail}`, // Kendi domain email adresiniz
-      pass: "8Fw{}+L%9~aS", // E-posta adresiniz için oluşturduğunuz şifre
+      pass: `${admin_pass}`, // E-posta adresiniz için oluşturduğunuz şifre
     },
   });
 
@@ -317,7 +286,7 @@ app.post("/duyuru-email", async (req, res) => {
     secure: secure, // true for SSL (465 portu), false for TLS (587 portu)
     auth: {
       user: `${admin_mail}`, // Kendi domain email adresiniz
-      pass: "8Fw{}+L%9~aS", // E-posta adresiniz için oluşturduğunuz şifre
+      pass: `${admin_pass}`, // E-posta adresiniz için oluşturduğunuz şifre
     },
   });
 
@@ -349,7 +318,7 @@ app.post("/contact-email", async (req, res) => {
     secure: secure, // true for SSL (465 portu), false for TLS (587 portu)
     auth: {
       user: `${admin_mail}`, // Kendi domain email adresiniz
-      pass: "8Fw{}+L%9~aS", // E-posta adresiniz için oluşturduğunuz şifre
+      pass: `${admin_pass}`, // E-posta adresiniz için oluşturduğunuz şifre
     },
   });
 
