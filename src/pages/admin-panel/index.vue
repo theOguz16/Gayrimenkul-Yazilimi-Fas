@@ -1,7 +1,3 @@
-<script setup>
-import axiosInstance from "@/lib/axios";
-import Header from "@/components/global/Header.vue";
-</script>
 <template>
   <div v-if="this.user.role === 'Admin'">
     <Header></Header>
@@ -15,13 +11,13 @@ import Header from "@/components/global/Header.vue";
         class="w-[70%] max-sm:w-full max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center"
       >
         <div class="flex items-center gap-3">
-          <p class="text-lg">Hoşgeldiniz:</p>
+          <p class="text-lg">{{ t("messages.welcome") }}</p>
           <span class="text-black font-bold"
             >{{ user.name }} {{ user.surname }}</span
           >
         </div>
         <div class="flex items-center gap-3">
-          <p class="text-lg">Kasadaki Para:</p>
+          <p class="text-lg">{{ t("messages.total_money") }}</p>
           <span class="text-black font-bold">
             {{ toplamPara }}
             <fai icon="turkish-lira-sign"></fai
@@ -36,17 +32,17 @@ import Header from "@/components/global/Header.vue";
         <div>
           <h1 class="text-7xl text-site-color-dark">Oops!</h1>
           <p class="w-[100%] font-medium text-2xl my-6 text-site-color-green">
-            Sanırım aradığını burada bulamadın.
+            {{ t("errors.not_find") }}
           </p>
           <ul class="flex flex-col gap-6">
-            <span class="text-lg text-site-color-dark"
-              >Sana yardımcı olabilecek bağlantılar:</span
-            >
+            <span class="text-lg text-site-color-dark">{{
+              t("errors.help_links")
+            }}</span>
             <li>
               <router-link
                 class="text-base bg-dark-purple p-3 rounded-md transition-all text-site-color-green"
                 to="/"
-                >Ana Sayfa</router-link
+                >{{ t("menu.main_page") }}</router-link
               >
             </li>
           </ul>
@@ -60,10 +56,17 @@ import Header from "@/components/global/Header.vue";
 </template>
 <script>
 import Binalar from "@/components/sidebar/Binalar.vue";
+import axiosInstance from "@/lib/axios";
+import { useI18n } from "vue-i18n";
 
 export default {
   components: {
     Binalar,
+  },
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
   },
   data() {
     return {

@@ -1,21 +1,3 @@
-<script setup>
-import binaListesi from "@/data/binaListesi.json";
-
-const genderList = {
-  male: {
-    gender: "Erkek",
-    value: 0,
-  },
-  female: {
-    gender: "Kadın",
-    value: 1,
-  },
-  other: {
-    gender: "Diğer",
-    value: 2,
-  },
-};
-</script>
 <template>
   <div
     class="container flex mx-auto mt-14 bg-white p-0 gap-4 max-sm:flex-col max-lg:flex-col"
@@ -34,17 +16,17 @@ const genderList = {
       >
         <div class="flex gap-5 max-sm:flex-col">
           <InputText
-            label="Ad"
+            :label="t('user.name')"
             type="text"
-            placeholder="Ad"
+            :placeholder="t('user.name')"
             required
             v-model="formData.name"
           />
 
           <InputText
-            label="Soyad"
+            :label="t('user.surname')"
             type="text"
-            placeholder="Soyadı"
+            :placeholder="t('user.surname')"
             required
             v-model="formData.surname"
           />
@@ -53,8 +35,8 @@ const genderList = {
         <div class="flex gap-5">
           <InputDate
             type="date"
-            value="gg.aa.yyyy"
-            label="Doğum Tarihi"
+            :value="t('user.date_type')"
+            :label="t('user.bd')"
             v-model="formData.dateOfBirth"
             required
           />
@@ -64,8 +46,8 @@ const genderList = {
             :items="binaListesi"
             itemKey="buildName"
             itemValue="name"
-            label="Seçiniz(Bina)"
-            defaultOptions="Lütfen bir bina seçiniz"
+            :label="t('user.select_building')"
+            :defaultOptions="t('user.please_select_build')"
             v-model="formData.buildName"
             required
           ></InputSelect>
@@ -73,8 +55,8 @@ const genderList = {
             :items="genderList"
             itemKey="value"
             itemValue="gender"
-            defaultOptions="Lütfen bir cinsiyet seçiniz"
-            label="Seçiniz(Cinsiyetiniz)"
+            :please_select_gender="t('user.please_select_gender')"
+            :label="t('user.select_gender')"
             v-model="formData.gender"
             required
           >
@@ -82,27 +64,27 @@ const genderList = {
         </div>
         <div>
           <InputText
-            label="E-Posta Adresi"
+            :placeholder="t('user.mail_address')"
             type="email"
-            placeholder="E-Posta Adresi"
+            :label="t('user.mail_address')"
             required
             v-model="formData.emailAddres"
           />
         </div>
         <div>
           <InputText
-            label="Telefon Numarası"
+            :placeholder="t('user.phone_number')"
             type="tel"
-            placeholder="Telefon Numarası"
+            :label="t('user.phone_number')"
             required
             v-model="formData.telNo"
           />
         </div>
         <div>
           <InputText
-            label="Şifre"
+            :label="t('user.password')"
             type="password"
-            placeholder="Şifre"
+            :placeholder="t('user.password')"
             field="password"
             v-model="formData.password"
             required
@@ -111,15 +93,15 @@ const genderList = {
         <div class="flex gap-5 max-sm:flex-col">
           <InputText
             type="number"
-            label="Kira Miktarı"
-            placeholder="Kira Miktarı"
+            :label="t('user.rent_amount')"
+            :placeholder="t('user.rent_amount')"
             v-model="formData.kiraMiktari"
             required
           ></InputText>
           <InputText
             type="number"
-            label="Aidat Miktarı"
-            placeholder="Aidat Miktarı"
+            :label="t('user.dues_amount')"
+            :placeholder="t('user.dues_amount')"
             v-model="formData.aidatMiktari"
             required
           ></InputText>
@@ -127,15 +109,15 @@ const genderList = {
         <div class="flex gap-5 max-sm:flex-col">
           <InputDate
             type="date"
-            value="gg.aa.yyyy"
-            label="Kira Tarihi"
+            :value="t('user.date_type')"
+            :label="t('user.rent_date')"
             v-model="formData.kiraTarihi"
             required
           />
           <InputDate
             type="date"
-            value="gg.aa.yyyy"
-            label="Aidat Tarihi"
+            :value="t('user.date_type')"
+            :label="t('user.dues_date')"
             v-model="formData.aidatTarihi"
             required
           />
@@ -144,15 +126,15 @@ const genderList = {
           <InputButton
             class="w-full bg-site-color-green"
             type="submit"
-            text="Kayıt Ol!"
+            :text="t('user.register')"
           />
         </div>
         <div id="register" class="mt-2">
           <p class="text-sm max-sm:text-center">
-            Bir hesabın var mı ?
-            <router-link class="text-site-color-green" to="/login"
-              >Giriş Yap!</router-link
-            >
+            {{ t("user.login_text") }}
+            <router-link class="text-site-color-green" to="/login">{{
+              t("user.login")
+            }}</router-link>
           </p>
         </div>
       </form>
@@ -163,10 +145,34 @@ const genderList = {
 import { eventBus } from "@/main.js";
 import axios from "axios";
 import box from "@/store/box.js";
+import binaListesiData from "@/data/binaListesi.json";
+import { useI18n } from "vue-i18n";
+
+const genderListData = {
+  male: {
+    gender: "Erkek",
+    value: 0,
+  },
+  female: {
+    gender: "Kadın",
+    value: 1,
+  },
+  other: {
+    gender: "Diğer",
+    value: 2,
+  },
+};
 
 export default {
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
+  },
   data() {
     return {
+      binaListesi: [],
+      genderList: [],
       users: [],
       formData: {
         name: "",
@@ -182,7 +188,6 @@ export default {
       },
     };
   },
-
   methods: {
     userOlustur() {
       if (this.formData.buildName !== null) {
@@ -212,12 +217,12 @@ export default {
 
         localStorage.setItem("token", response.data.token);
 
-        box.addSuccess("Tebrikler", "Kayıt Olma Başarılı!");
+        box.addSuccess(this.t("success.register"), this.t("success.welcome"));
 
         this.$router.push("/kira-panel");
         // this.reset();
       } catch (error) {
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
         console.error(error);
       }
     },
@@ -232,6 +237,8 @@ export default {
   },
   created() {
     this.fetchQuestions();
+    this.binaListesi = binaListesiData;
+    this.genderList = genderListData;
   },
 };
 </script>

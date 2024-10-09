@@ -1,19 +1,3 @@
-<script setup>
-const helpList = {
-  istek: {
-    key: "İstek Bildir",
-  },
-  sikayet: {
-    key: "Şikayet Bildir",
-  },
-  odeme: {
-    key: "Ödeme Hakkında Yardım Al",
-  },
-  yardim: {
-    key: "FAS Hakkında Yardım Al",
-  },
-};
-</script>
 <template>
   <!-- mobil tasarım hatasını düzelt -->
   <!-- şikayetlere tıklayınca çok büyük çıkıyor düzelt -->
@@ -30,37 +14,39 @@ const helpList = {
       id="contact"
       class="max-w-[560px] mx-auto border-slate-50 rounded-md border p-6 bg-white my-auto"
     >
-      <h3 class="mb-5 text-site-color-green text-center">İletişime Geç</h3>
+      <h3 class="mb-5 text-site-color-green text-center">
+        {{ t("menu.contact") }}
+      </h3>
       <form @submit.prevent="contactUs" class="grid grid-rows-3 gap-5">
         <div class="flex gap-5 max-sm:flex-col">
           <InputText
-            label="Ad"
+            :label="t('user.name')"
             type="text"
-            placeholder="Ad"
+            :placeholder="t('user.name')"
             required
             v-model="name"
           />
 
           <InputText
-            label="Soyad"
+            :label="t('user.surname')"
             type="text"
-            placeholder="Soyadı"
+            :placeholder="t('user.surname')"
             required
             v-model="surname"
           />
         </div>
         <div class="flex gap-5 max-sm:flex-col">
           <InputText
-            label="E-Posta Adresi"
+            :label="t('user.mail_address')"
             type="email"
-            placeholder="E-Posta Adresi"
+            :placeholder="t('user.mail_address')"
             required
             v-model="emailAddres"
           />
           <InputText
-            label="Telefon Numarası"
+            :label="t('user.phone_number')"
             type="tel"
-            placeholder="Telefon Numarası"
+            :placeholder="t('user.phone_number')"
             required
             v-model="telNo"
           />
@@ -70,8 +56,8 @@ const helpList = {
             :items="Object.values(helpList)"
             itemKey="key"
             itemValue="key"
-            defaultOptions="Lütfen konu seçiniz"
-            label="Seçiniz(Konu)"
+            :defaultOptions="t('user.select_subject')"
+            :label="t('user.select_subject')"
             required
             v-model="subject"
           >
@@ -80,8 +66,8 @@ const helpList = {
             :items="binaListesi"
             itemKey="buildName"
             itemValue="name"
-            label="Seçiniz(Bina)"
-            defaultOptions="Lütfen bir bina seçiniz"
+            :label="t('user.select_building')"
+            :defaultOptions="t('user.please_select_build')"
             required
             v-model="buildName"
           ></InputSelect>
@@ -91,7 +77,8 @@ const helpList = {
             rows="4"
             cols="50"
             required
-            label="Mesajınız Yazın"
+            :label="t('user.msg')"
+            :placeholder="t('user.msg')"
             v-model="message"
           ></InputTextarea>
         </div>
@@ -99,7 +86,7 @@ const helpList = {
           <InputButton
             class="w-full bg-site-color-green"
             type="submit"
-            text="İletişime Geç!"
+            :text="t('contact.contact_button')"
           />
         </div>
       </form>
@@ -109,11 +96,34 @@ const helpList = {
 <script>
 import axiosInstance from "@/lib/axios";
 import box from "@/store/box.js";
-import binaListesi from "@/data/binaListesi.json";
+import binaListesiData from "@/data/binaListesi.json";
+import { useI18n } from "vue-i18n";
+
+const helpListData = {
+  istek: {
+    key: "İstek Bildir",
+  },
+  sikayet: {
+    key: "Şikayet Bildir",
+  },
+  odeme: {
+    key: "Ödeme Hakkında Yardım Al",
+  },
+  yardim: {
+    key: "FAS Hakkında Yardım Al",
+  },
+};
 
 export default {
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
+  },
   data() {
     return {
+      binaListesi: [],
+      helpList: [],
       message: "",
       buildName: "",
       name: "",
@@ -123,7 +133,10 @@ export default {
       emailAddres: "",
     };
   },
-
+  created() {
+    this.binaListesi = binaListesiData;
+    this.helpList = helpListData;
+  },
   methods: {
     async contactUs() {
       try {
@@ -136,9 +149,12 @@ export default {
           buildName: this.buildName,
           message: this.message,
         });
-        box.addSuccess("Tebrikler!", "İletişim Formu Başarıyla İletildi");
+        box.addSuccess(
+          this.t("success.congrats"),
+          this.t("contact.contact_congrats")
+        );
       } catch (error) {
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
         console.error(error);
       } finally {
         this.name = "";

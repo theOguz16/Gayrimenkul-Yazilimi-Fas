@@ -1,4 +1,3 @@
-<script setup></script>
 <template>
   <div>
     <Header></Header>
@@ -12,11 +11,15 @@
         class="w-[70%] max-sm:w-full max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center"
       >
         <div class="mb-8">
-          <h2 class="max-2xl:text-center max-2xl:mb-4">Bina Bilgi Paneli</h2>
+          <h2 class="max-2xl:text-center max-2xl:mb-4">
+            {{ t("buildpanel.build_info_panel") }}
+          </h2>
           <div
             class="flex items-center gap-3 max-2xl:text-center max-2xl:justify-center"
           >
-            <p class="text-lg max-2xl:text-center">Bina Adı:</p>
+            <p class="text-lg max-2xl:text-center">
+              {{ t("buildpanel.build_name") }}:
+            </p>
             <span class="text-black font-bold max-2xl:text-center">{{
               user.buildName
             }}</span>
@@ -25,7 +28,9 @@
           <div
             class="flex items-center gap-3 max-2xl:text-center max-2xl:justify-center"
           >
-            <p class="text-lg max-2xl:text-center">Bina Sahibi:</p>
+            <p class="text-lg max-2xl:text-center">
+              {{ t("buildpanel.build_owner") }}:
+            </p>
             <span class="text-black font-bold max-2xl:text-center"
               >{{ user.name }} {{ user.surname }}</span
             >
@@ -37,13 +42,13 @@
         >
           <div id="odeme">
             <div class="flex items-center gap-3 max-sm:mb-1 max-2xl:mb-2">
-              <p class="text-lg">Kira Miktarı:</p>
+              <p class="text-lg">{{ t("user.rent_amount") }}:</p>
               <span class="text-black font-bold"
                 >{{ user.kiraMiktari }} <fai icon="turkish-lira-sign"></fai
               ></span>
             </div>
             <div class="flex items-center gap-3 max-sm:mb-1 max-2xl:mb-2">
-              <p class="text-lg">Aidat Miktarı:</p>
+              <p class="text-lg">{{ t("user.dues_amount") }}:</p>
               <span class="text-black font-bold"
                 >{{ user.aidatMiktari }} <fai icon="turkish-lira-sign"></fai
               ></span>
@@ -51,13 +56,13 @@
           </div>
           <div id="tarih">
             <div class="flex items-center gap-3 max-sm:mb-1 max-2xl:mb-2">
-              <p class="text-lg">Kira Ödeme Tarihi:</p>
+              <p class="text-lg">{{ t("user.rent_date") }} :</p>
               <span class="text-black font-bold">{{
                 formatTarih(user.kiraTarihi)
               }}</span>
             </div>
             <div class="flex items-center gap-3 max-sm:mb-1 max-2xl:mb-2">
-              <p class="text-lg">Aidat Ödeme Tarihi:</p>
+              <p class="text-lg">{{ t("user.dues_date") }} :</p>
               <span class="text-black font-bold">{{
                 formatTarih(user.aidatTarihi)
               }}</span>
@@ -71,42 +76,38 @@
             id="bilgilendirme"
             class="flex flex-col gap-2 justify-center max-sm:w-full max-sm:text-center max-sm:items-center max-2xl:w-full max-2xl:text-center max-2xl:items-center"
           >
-            <RouterLink to="/">
+            <div @click="sendKiraSMS" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
-                  <span class="font-semibold">{{ user.buildName }}</span>
-                  binasını <span class="font-semibold">Kira</span> için SMS ile
-                  uyar
+                  <span class="font-semibold">{{ user.buildName }},</span>
+                  {{ t("buildpanel.sms_rent_msg") }}
                 </p>
                 <fai class="text-lg max-sm:text-[16px]" icon="message"></fai>
               </div>
-            </RouterLink>
+            </div>
             <div @click="sendKiraEmail" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
-                  <span class="font-semibold">{{ user.buildName }}</span>
-                  binasını <span class="font-semibold">Kira</span> için Mail ile
-                  uyar
+                  <span class="font-semibold">{{ user.buildName }},</span>
+                  {{ t("buildpanel.mail_rent_msg") }}
                 </p>
                 <fai class="text-lg max-sm:text-[16px]" icon="envelope"></fai>
               </div>
             </div>
-            <RouterLink to="/">
+            <div @click="sendAidatSMS" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
-                  <span class="font-semibold">{{ user.buildName }}</span>
-                  binasını <span class="font-semibold">Aidat</span> için SMS ile
-                  uyar
+                  <span class="font-semibold">{{ user.buildName }},</span>
+                  {{ t("buildpanel.sms_dues_msg") }}
                 </p>
                 <fai class="text-lg max-sm:text-[16px]" icon="message"></fai>
               </div>
-            </RouterLink>
+            </div>
             <div @click="sendAidatEmail" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
-                  <span class="font-semibold">{{ user.buildName }}</span>
-                  binasını <span class="font-semibold">Aidat</span> için Mail
-                  ile uyar
+                  <span class="font-semibold">{{ user.buildName }},</span>
+                  {{ t("buildpanel.mail_dues_msg") }}
                 </p>
                 <fai class="text-lg max-sm:text-[16px]" icon="envelope"></fai>
               </div>
@@ -116,9 +117,9 @@
             id="odeme-kontrol"
             class="border-2 border-gray-200 p-4 flex flex-col gap-4 max-sm:items-center max-sm:justify-center max-sm:mt-12 max-2xl:items-center max-2xl:justify-center max-2xl:mt-12"
           >
-            <h3 class="text-center">Ödeme Kontrolleri</h3>
+            <h3 class="text-center">{{ t("buildpanel.payment_control") }}</h3>
             <div class="flex items-center gap-3">
-              <p class="text-lg">Kira Ödemesi Yapıldı Mı ?</p>
+              <p class="text-lg">{{ t("buildpanel.rent_check") }}</p>
               <input
                 v-model="kiraCheckbox"
                 @change="updateKiraCheckbox"
@@ -128,7 +129,7 @@
               />
             </div>
             <div class="flex items-center gap-3">
-              <p class="text-lg">Aidat Ödemesi Yapıldı Mı ?</p>
+              <p class="text-lg">{{ t("buildpanel.dues_check") }}</p>
               <input
                 v-model="aidatCheckbox"
                 @change="updateAidatCheckbox"
@@ -148,8 +149,14 @@ import Binalar from "@/components/sidebar/Binalar.vue";
 import axiosInstance from "@/lib/axios";
 import { useRouter } from "vue-router"; // Vue Router'ı kullanıyoruz
 import box from "@/store/box.js";
+import { useI18n } from "vue-i18n";
 
 export default {
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
+  },
   components: {
     Binalar,
   },
@@ -180,11 +187,11 @@ export default {
 
         await axiosInstance.post("http://localhost:3000/send-email", emailData);
         box.addSuccess(
-          "Tebrikler",
-          "E-Posta ile Kira Uyarısı Başarıyla Gönderildi!"
+          this.t("success.congrats"),
+          this.t("messages.rent_message")
         );
       } catch (error) {
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
         console.error("Mail gönderme hatası:", error);
       }
     },
@@ -198,12 +205,46 @@ export default {
 
         await axiosInstance.post("http://localhost:3000/send-email", emailData);
         box.addSuccess(
-          "Tebrikler",
-          "E-Posta ile Aidat Uyarısı Başarıyla Gönderildi!"
+          this.t("success.congrats"),
+          this.t("messages.dues_message")
         );
       } catch (error) {
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
         console.error("Mail gönderme hatası:", error);
+      }
+    },
+    async sendKiraSMS() {
+      try {
+        const smsData = {
+          phoneNumber: this.user.telNo,
+          message: `Merhaba, ${this.user.buildName} binası için kira ödemesi yapılmamıştır. Lütfen en kısa sürede ödeme yapın.`,
+        };
+
+        await axiosInstance.post(
+          "http://localhost:3000/send-kira-sms",
+          smsData
+        );
+        box.addSuccess(this.t("success.congrats"), this.t("messages.sms_rent"));
+      } catch (error) {
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
+        console.error("SMS gönderme hatası:", error);
+      }
+    },
+    async sendAidatSMS() {
+      try {
+        const smsData = {
+          phoneNumber: this.user.telNo,
+          message: `Merhaba, ${this.user.buildName} binası için aidat ödemesi yapılmamıştır. Lütfen en kısa sürede ödeme yapın.`,
+        };
+
+        await axiosInstance.post(
+          "http://localhost:3000/send-aidat-sms",
+          smsData
+        );
+        box.addSuccess(this.t("success.congrats"), this.t("messages.sms_dues"));
+      } catch (error) {
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
+        console.error("SMS gönderme hatası:", error);
       }
     },
     async updateKiraCheckbox() {
@@ -213,11 +254,14 @@ export default {
           `http://localhost:3000/binalar/${buildName.bina}/kiraCheckbox`,
           { kiraCheckbox: this.kiraCheckbox }
         );
-        box.addSuccess("Tebrikler", "Renk Değiştirme İşlemi Başarılı!");
+        box.addSuccess(
+          this.t("success.congrats"),
+          this.t("messages.change_color")
+        );
         this.kiraCheckbox = response.data.user.kiraCheckbox; // Backend'den gelen veriyi güncelle
         this.user = response.data.user;
       } catch (error) {
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
         console.error("Kullanıcı bilgileri alınamadı:", error);
       }
     },
@@ -229,11 +273,14 @@ export default {
           `http://localhost:3000/binalar/${buildName.bina}/aidatCheckbox`,
           { aidatCheckbox: this.aidatCheckbox }
         );
-        box.addSuccess("Tebrikler", "Renk Değiştirme İşlemi Başarılı!");
+        box.addSuccess(
+          this.t("success.congrats"),
+          this.t("messages.change_color")
+        );
         this.aidatCheckbox = response.data.user.aidatCheckbox; // Backend'den gelen veriyi güncelle
         this.user = response.data.user;
       } catch (error) {
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
         console.error("Kullanıcı bilgileri alınamadı:", error);
       }
     },

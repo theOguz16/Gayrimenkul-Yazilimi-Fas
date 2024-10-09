@@ -1,8 +1,11 @@
 NOT:
-Mailler bazen buga giriyor öyle olunca env dosyasından çekme manuel olarak elle yaz daha sonra tekrar env ile yaz
+-Mailler bazen buga giriyor öyle olunca env dosyasından çekme manuel olarak elle yaz daha sonra tekrar env ile yaz
+-Twilio ile sms şeyini yaptım ama tekrar deneme sms yabancı geliyor paralı olabilir araştır
+-SMS ve e-posta [binalar] bozuldu bak
+-Çeviriye yeni binalar eklenecekse ekle, yoksa son bir kez gözden geçir
 
 ÖNCELİKLİ YAPILACAKLAR: 
-2- Backend kodlarını düzenle klasor klasor
+1- Backend kodlarını düzenle klasor klasor
 
 SMS İŞLERİ:
 1- Contact Sayfası iletişim formunun oluştuğuna dair bir sms gelsin sonrasında maili kontrol et desin
@@ -12,6 +15,6 @@ SMS İŞLERİ:
 ÖNCELİKLİ OLMAYAN İŞLER:
 1- TUĞBERK ABININ YAPTIGI BOXLARDAN FRONTEND KISMINA YERLEŞTİR(şimdilik yapıldı yeni gelen şeylere eklenmeli)
 2- ODEME SAYFASI
-3- Yabancı diller için klasor olusturuldu onun üstüne ekleme yapacağım
+
 
 

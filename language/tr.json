@@ -1,0 +1,84 @@
+{
+  "user": {
+    "login": "Giriş Yap!",
+    "register": "Kayıt Ol!",
+    "password": "Şifre",
+    "login_text": "Bir hesabın var mı?",
+    "select_building": "Bina Seçin",
+    "please_select_build": "Lütfen bir bina seçiniz",
+    "phone_number": "Telefon Numarası",
+    "mail_address": "E-Posta Adresi",
+    "please_select_gender": "Lütfen bir cinsiyet seçiniz",
+    "select_gender": "Cinsiyet Seç",
+    "bd_value": "gg.aa.yyyy",
+    "bd": "Doğum Tarihi",
+    "name": "Ad",
+    "surname": "Soy Ad",
+    "rent_date": "Kira Tarihi",
+    "dues_date": "Aidat Tarihi",
+    "rent_amount": "Kira Miktarı",
+    "dues_amount": "Aidat Miktarı",
+    "build_list": "Bina Listesi",
+    "select_subject": "Lütfen bir konu seçiniz",
+    "msg": "Mesajınız"
+  },
+  "success": {
+    "login": "Giriş Başarılı",
+    "welcome": "Hoş Geldiniz",
+    "register": "Kayıt Olma Başarılı",
+    "congrats": "Tebrikler",
+    "logout": "Çıkış Yapma İşlemi Başarılı"
+  },
+  "errors": {
+    "sorry": "Üzgünüz",
+    "general": "Bir hata oluştu",
+    "not_find": "Sanırım aradığını burada bulamadın.",
+    "help_links": "Sana yardımcı olabilecek bağlantılar:"
+  },
+  "menu": {
+    "main_page": "Ana Sayfa",
+    "admin_panel": "Yönetici Paneli",
+    "logout": "Çıkış Yap",
+    "login": "Giriş Yap",
+    "contact": "İletişime Geç",
+    "payment": "Ödeme Yap",
+    "rent_panel": "Kira Paneli",
+    "user_panel": "Kullanıcı Paneli",
+    "register": "Kayıt Ol",
+    "announcement": "Duyurular"
+  },
+  "messages": {
+    "welcome": "Hoş Geldiniz:",
+    "total_money": "Toplam Para:",
+    "rent_message": "E-Posta yoluyla kira uyarısı başarıyla gönderildi.",
+    "dues_message": "E-Posta yoluyla aidat uyarısı başarıyla gönderildi.",
+    "sms_rent": "SMS yoluyla kira uyarısı başarıyla gönderildi.",
+    "sms_dues": "SMS yoluyla aidat uyarısı başarıyla gönderildi.",
+    "change_color": "Renk değiştirme işlemi başarılı."
+  },
+  "buildpanel": {
+    "build_info_panel": "Bina Bilgi Paneli",
+    "build_name": "Bina Adı",
+    "build_owner": "Bina Sahibi",
+    "sms_rent_msg": "SMS ile kira hatırlat",
+    "mail_rent_msg": "E-Posta ile aidat hatırlat",
+    "sms_dues_msg": "SMS ile aidat hatırlat",
+    "mail_dues_msg": "E-Posta ile aidat hatırlat",
+    "rent_check": "Kira ödemesi yapıldı mı ?",
+    "dues_check": "Aidat ödemesi yapıldı mı ?",
+    "payment_control": "Ödeme Kontrolleri"
+  },
+  "ann": {
+    "congrats_mail": "E-Posta ile Duyuru İletimi Başarılı!",
+    "title": "Duyuru Oluştur",
+    "header": "Duyuru Başlığı",
+    "explain": "Duyuru Açıklaması",
+    "type": "Uyarı Türü Seçiniz",
+    "members": "Uyarılması Gerekilen Bina Üyeleri",
+    "create": "Duyuru Oluştur"
+  },
+  "contact": {
+    "contact_congrats": "İletişim Formu Başarıyla Gönderildi!",
+    "contact_button": "İletişime Geç!"
+  }
+}

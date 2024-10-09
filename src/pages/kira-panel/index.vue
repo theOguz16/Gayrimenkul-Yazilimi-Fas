@@ -1,8 +1,3 @@
-<script setup>
-import axiosInstance from "@/lib/axios";
-import box from "@/store/box.js";
-import Header from "@/components/global/Header.vue";
-</script>
 <template>
   <Header></Header>
   <div
@@ -12,13 +7,13 @@ import Header from "@/components/global/Header.vue";
       class="max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center"
     >
       <div class="flex items-center gap-3">
-        <p class="text-lg">Hoşgeldiniz</p>
+        <p class="text-lg">{{ t("success.welcome") }}:</p>
         <span class="text-black font-bold"
           >{{ user.name }} {{ user.surname }}</span
         >
       </div>
       <div class="flex items-center gap-3">
-        <p class="text-lg">Bina Adı:</p>
+        <p class="text-lg">{{ t("buildpanel.build_name") }}:</p>
         <span class="text-black font-bold">{{ user.buildName }}</span>
       </div>
       <div
@@ -27,13 +22,13 @@ import Header from "@/components/global/Header.vue";
       >
         <div id="odeme">
           <div class="flex items-center gap-3">
-            <p class="text-lg">Kira Miktarı:</p>
+            <p class="text-lg">{{ t("user.rent_amount") }}:</p>
             <span class="text-black font-bold"
               >{{ user.kiraMiktari }} <fai icon="turkish-lira-sign"></fai
             ></span>
           </div>
           <div class="flex items-center gap-3">
-            <p class="text-lg">Aidat Miktarı:</p>
+            <p class="text-lg">{{ t("user.dues_amount") }}:</p>
             <span class="text-black font-bold"
               >{{ user.aidatMiktari }} <fai icon="turkish-lira-sign"></fai
             ></span>
@@ -41,13 +36,13 @@ import Header from "@/components/global/Header.vue";
         </div>
         <div id="tarih">
           <div class="flex items-center gap-3">
-            <p class="text-lg">Kira Ödeme Tarihi:</p>
+            <p class="text-lg">{{ t("user.rent_date") }}:</p>
             <span class="text-black font-bold">{{
               formatTarih(user.kiraTarihi)
             }}</span>
           </div>
           <div class="flex items-center gap-3">
-            <p class="text-lg">Aidat Ödeme Tarihi:</p>
+            <p class="text-lg">{{ t("user.dues_date") }}:</p>
             <span class="text-black font-bold">{{
               formatTarih(user.aidatTarihi)
             }}</span>
@@ -58,12 +53,12 @@ import Header from "@/components/global/Header.vue";
         <RouterLink
           to="/payment"
           class="bg-site-color-green text-white rounded-md py-2 px-3"
-          >Ödeme Yap</RouterLink
+          >{{ t("menu.payment") }}</RouterLink
         >
         <RouterLink
           to="/contact"
           class="bg-[#D70040] text-white rounded-md py-2 px-3"
-          >İletişime Geç</RouterLink
+          >{{ t("menu.contact") }}</RouterLink
         >
       </div>
     </div>
@@ -71,10 +66,17 @@ import Header from "@/components/global/Header.vue";
 </template>
 <script>
 import Binalar from "@/components/sidebar/Binalar.vue";
+import axiosInstance from "@/lib/axios";
+import { useI18n } from "vue-i18n";
 
 export default {
   components: {
     Binalar,
+  },
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
   },
   data() {
     return {

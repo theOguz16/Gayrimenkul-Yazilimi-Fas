@@ -1,0 +1,84 @@
+{
+  "user": {
+    "login": "Login!",
+    "register": "Register!",
+    "password": "Password",
+    "login_text": "Do you have an account?",
+    "select_building": "Select Building",
+    "please_select_build": "Please select a building",
+    "phone_number": "Phone Number",
+    "mail_address": "E-Mail Address",
+    "please_select_gender": "Please select a gender",
+    "select_gender": "Select Gender",
+    "date_type": "dd.mm.yyyy",
+    "bd": "Birthday",
+    "name": "Name",
+    "surname": "Surname",
+    "rent_date": "Rent Date",
+    "dues_date": "Dues Date",
+    "rent_amount": "Rent Amount",
+    "dues_amount": "Dues Amount",
+    "build_list": "Build List",
+    "select_subject": "Please select a subject",
+    "msg": "Your Message"
+  },
+  "success": {
+    "login": "Login Successful",
+    "welcome": "Welcome",
+    "register": "Register Successful",
+    "congrats": "Congratulations",
+    "logout": "Logout successful"
+  },
+  "errors": {
+    "sorry": "Sorry",
+    "general": "An error occurred",
+    "not_find": "I guess you didn't find what you were looking for here.",
+    "help_links": "Links that may help you:"
+  },
+  "menu": {
+    "main_page": "Main Page",
+    "admin_panel": "Admin Panel",
+    "logout": "Logout",
+    "login": "Login",
+    "contact": "Contact",
+    "payment": "Payment",
+    "rent_panel": "Rent Panel",
+    "user_panel": "User Panel",
+    "register": "Register",
+    "announcement": "Announcement"
+  },
+  "messages": {
+    "welcome": "Welcome:",
+    "total_money": "Total Money:",
+    "rent_message": "Rent warning via e-mail has been made successfully.",
+    "dues_message": "Dues warning via e-mail has been made successfully.",
+    "sms_rent": "Rent warning via SMS has been made successfully.",
+    "sms_dues": "Rent warning via SMS has been made successfully.",
+    "change_color": "Color change operation successful."
+  },
+  "buildpanel": {
+    "build_info_panel": "Building Information Panel",
+    "build_name": "Build Name",
+    "build_owner": "Build Owner",
+    "sms_rent_msg": "Remind about rent via SMS",
+    "mail_rent_msg": "Remind about rent via E-Mail",
+    "sms_dues_msg": "Remind about dues via SMS",
+    "mail_dues_msg": "Remind about dues via E-Mail",
+    "rent_check": "Has the rent been paid ?",
+    "dues_check": "Has the dues been paid ?",
+    "payment_control": "Payment Controls"
+  },
+  "ann": {
+    "congrats_mail": "Announcement Delivery by E-Mail Successful!",
+    "title": "Create Announcement",
+    "header": "Announcement Title",
+    "explain": "Announcement Explanation",
+    "type": "Select Alert Type",
+    "members": "Building Members Who Need to Be Warned",
+    "create": "Create Announcement"
+  },
+  "contact": {
+    "contact_congrats": "Contact Form Has Been Sent Successfully!",
+    "contact_button": "Contact!"
+  }
+}

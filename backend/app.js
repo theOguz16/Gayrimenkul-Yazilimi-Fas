@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const nodemailer = require("nodemailer");
+// const twilio = require("twilio");
 const path = require("path");
 const app = express();
 const bodyParser = require("body-parser");
@@ -16,6 +17,36 @@ const admin_mail = process.env.ADMIN_MAIL;
 const admin_pass = process.env.ADMIN_PASS;
 
 const middlewareAuth = require("./middlewares/auth");
+
+//SMS İşlemleri
+
+// const twilioClient = twilio(
+//   process.env.TWILIO_ACCOUNT_SID,
+//   process.env.TWILIO_AUTH_TOKEN
+// );
+// function sendSMS(phoneNumber, message) {
+//   return twilioClient.messages.create({
+//     body: message,
+//     from: process.env.TWILIO_PHONE_NUMBER,
+//     to: phoneNumber,
+//   });
+// }
+// function formatPhoneNumber(phoneNumber) {
+//   // Numaradaki tüm boşlukları ve tire işaretlerini kaldır
+//   let cleaned = phoneNumber.replace(/\s+/g, "").replace(/-/g, "");
+
+//   // Eğer numara 0 ile başlıyorsa, onu kaldır
+//   if (cleaned.startsWith("0")) {
+//     cleaned = cleaned.substring(1);
+//   }
+
+//   // Eğer numara henüz +90 ile başlamıyorsa, ekle
+//   if (!cleaned.startsWith("+90")) {
+//     cleaned = "+90" + cleaned;
+//   }
+
+//   return cleaned;
+// }
 
 app.use(bodyParser.json());
 
@@ -359,6 +390,34 @@ app.post("/get-emails", middlewareAuth, async (req, res) => {
     return res.status(500).json({ message: "Sunucu hatası" });
   }
 });
+
+//Kira&Aidat SMS
+// app.post("/send-kira-sms", middlewareAuth, async (req, res) => {
+//   let { phoneNumber, message } = req.body;
+
+//   phoneNumber = formatPhoneNumber(phoneNumber);
+
+//   try {
+//     await sendSMS(phoneNumber, message);
+//     res.status(200).json({ message: "SMS başarıyla gönderildi" });
+//   } catch (error) {
+//     console.error("SMS gönderme hatası:", error);
+//     res.status(500).json({ error: "SMS gönderilirken bir hata oluştu" });
+//   }
+// });
+// app.post("/send-aidat-sms", middlewareAuth, async (req, res) => {
+//   let { phoneNumber, message } = req.body;
+
+//   phoneNumber = formatPhoneNumber(phoneNumber);
+
+//   try {
+//     await sendSMS(phoneNumber, message);
+//     res.status(200).json({ message: "SMS başarıyla gönderildi" });
+//   } catch (error) {
+//     console.error("SMS gönderme hatası:", error);
+//     res.status(500).json({ error: "SMS gönderilirken bir hata oluştu" });
+//   }
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

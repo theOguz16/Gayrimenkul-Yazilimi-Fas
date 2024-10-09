@@ -3,19 +3,29 @@ import App from "./App.vue";
 import router from "./router";
 import { createI18n } from "vue-i18n";
 
+export const eventBus = new Vue();
+
 // CSS
 import "./assets/style.css";
 
 // Diller
-import * as en from "../language/en.yaml";
-import * as tr from "../language/tr.yaml";
+import en from "../language/en.json";
+import tr from "../language/tr.json";
+
+// Tarayıcı dilini algıla
+const getBrowserLanguage = () => {
+  const lang = navigator.language || navigator.userLanguage; // Tarayıcı dilini al
+  return lang.startsWith("tr") ? "tr" : "en"; // Türkçe ise 'tr', değilse 'en' döner
+};
 
 // Vue i18n kurulum
 const i18n = createI18n({
-  locale: "tr",
+  legacy: false,
+  globalInjection: true,
+  locale: getBrowserLanguage(),
   messages: {
-    en: en.default,
-    tr: tr.default,
+    en,
+    tr,
   },
 });
 

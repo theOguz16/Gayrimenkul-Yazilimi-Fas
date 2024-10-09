@@ -1,16 +1,3 @@
-<script setup>
-import binaListesi from "@/data/binaListesi.json";
-
-const uyariTuru = {
-  istek: {
-    key: "SMS ile Uyar",
-  },
-  sikayet: {
-    key: "E-Posta ile Uyar",
-  },
-};
-</script>
-
 <template>
   <Header></Header>
   <div
@@ -19,7 +6,7 @@ const uyariTuru = {
     <div class="bg-white">
       <div class="cursor-pointer" id="duyuru-header">
         <h1 class="p-4 text-center text-site-color-green max-sm:w-full">
-          Duyuru Oluştur
+          {{ t("ann.title") }}
         </h1>
       </div>
       <form @submit.prevent="duyuruOlustur">
@@ -30,8 +17,8 @@ const uyariTuru = {
           <div>
             <InputText
               v-model="duyuruBasligi"
-              placeholder="Duyuru Başlığı"
-              label="Duyuru Başlığı"
+              :placeholder="t('ann.header')"
+              :label="t('ann.header')"
               type="text"
               required
               field="title"
@@ -40,8 +27,8 @@ const uyariTuru = {
           <div>
             <InputTextarea
               v-model="duyuruAciklamasi"
-              placeholder="Duyuru Açıklaması"
-              label="Duyuru Açıklaması"
+              :placeholder="t('ann.explain')"
+              :label="t('ann.explain')"
               type="text"
             ></InputTextarea>
           </div>
@@ -51,14 +38,15 @@ const uyariTuru = {
               :items="Object.values(uyariTuru)"
               itemKey="key"
               itemValue="key"
-              label="Seçiniz(Uyarı Türü)"
-              defaultOptions="Lütfen bir uyarı türü seçiniz"
+              :label="t('ann.type')"
+              :defaultOptions="t('ann.type')"
               required
             ></InputSelect>
           </div>
           <div>
-            <span class="text-site-color-dark font-semibold flex justify-center"
-              >Uyarılacak Bina Üyeleri</span
+            <span
+              class="text-site-color-dark font-semibold flex justify-center"
+              >{{ t("ann.members") }}</span
             >
             <li
               v-for="item in binaListesi"
@@ -81,7 +69,7 @@ const uyariTuru = {
             <InputButton
               class="bg-site-color-green text-white w-full outline-none"
               type="submit"
-              text="Duyuru Oluştur"
+              :text="t('ann.create')"
             ></InputButton>
           </div>
         </div>
@@ -89,20 +77,41 @@ const uyariTuru = {
     </div>
   </div>
 </template>
-
 <script>
 import axiosInstance from "@/lib/axios";
 import box from "@/store/box.js";
+import binaListesiData from "@/data/binaListesi.json";
+import { useI18n } from "vue-i18n";
+
+const uyariTuruData = {
+  istek: {
+    key: "SMS ile Uyar",
+  },
+  sikayet: {
+    key: "E-Posta ile Uyar",
+  },
+};
 
 export default {
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
+  },
   data() {
     return {
+      binaListesi: [],
+      uyariTuru: [],
       selectedBuildings: [], // Seçilen bina isimleri
       selectedUsers: [],
       duyuruBasligi: "",
       duyuruAciklamasi: "",
       uyariTuruSecim: "",
     };
+  },
+  created() {
+    this.binaListesi = binaListesiData;
+    this.uyariTuru = uyariTuruData;
   },
   methods: {
     uyariGonder(buildingName, isChecked) {
@@ -134,11 +143,14 @@ export default {
               message: this.duyuruAciklamasi,
             });
           }
-          box.addSuccess("Tebrikler", "E-Posta ile Duyuru İletimi Başarılı!");
+          box.addSuccess(
+            this.t("success.congrats"),
+            this.t("ann.congrats_mail")
+          );
         }
       } catch (error) {
         console.error("E-posta gönderilirken bir hata oluştu:", error);
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
       } finally {
         // Sayfayı yenile
         location.reload();

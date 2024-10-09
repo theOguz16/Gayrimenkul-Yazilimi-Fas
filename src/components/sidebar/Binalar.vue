@@ -1,12 +1,8 @@
-<script setup>
-import binaListesi from "@/data/binaListesi.json";
-</script>
-
 <template>
   <div class="flex flex-col bg-white rounded-[5px] w-full">
     <span
       class="font-bold text-md text-site-color-dark border-b-2 text-center py-6 block"
-      >Bina Listesi
+      >{{ t("user.build_list") }}
     </span>
     <ul class="flex flex-col bg-white rounded-[5px] w-full">
       <li
@@ -26,16 +22,27 @@ import binaListesi from "@/data/binaListesi.json";
 </template>
 <script>
 import axiosInstance from "@/lib/axios";
+import binaListesiData from "@/data/binaListesi.json";
+import { useI18n } from "vue-i18n";
 
 export default {
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
+  },
   data() {
     return {
+      binaListesi: [],
       user: {},
       kiraCheckbox: false,
       aidatCheckbox: false,
       currentBuildingName: "",
       binaDurumlari: [],
     };
+  },
+  created() {
+    this.binaListesi = binaListesiData; // JSON verisini burada atıyoruz
   },
   methods: {
     getBackgroundClass(binaName) {
@@ -113,8 +120,6 @@ export default {
           window.location.reload();
         }
       );
-
-      //NOT TUĞBERK ABININ YAPTIGI BOXLARDAN KOYARSAN SUPER OLUR
     } catch (error) {
       console.error("Kullanıcı bilgileri alınamadı:", error);
     }

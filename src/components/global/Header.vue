@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <header class="bg-site-color-green flex items-center p-1 h-[70px] mb-20">
     <div class="container">
@@ -23,7 +21,7 @@
                 aria-expanded="false"
                 aria-label="Dropdown"
               >
-                <span>Yönetici Paneli</span>
+                <span> {{ t("menu.admin_panel") }} </span>
                 <svg
                   class=""
                   xmlns="http://www.w3.org/2000/svg"
@@ -50,32 +48,32 @@
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/admin-panel"
                 >
-                  Admin Panel
+                  {{ t("menu.admin_panel") }}
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/announcement"
                 >
-                  Duyurular
+                  {{ t("menu.announcement") }}
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/register"
                 >
-                  Kayıt Oluştur
+                  {{ t("menu.register") }}
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/login"
                 >
-                  Giriş Yap
+                  {{ t("menu.login") }}
                 </RouterLink>
                 <RouterLink
                   @click="logout"
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/login"
                 >
-                  Çıkış Yap
+                  {{ t("menu.logout") }}
                 </RouterLink>
               </div>
             </div>
@@ -91,7 +89,7 @@
                 aria-expanded="false"
                 aria-label="Dropdown"
               >
-                <span>Kullanıcı Paneli</span>
+                <span>{{ t("menu.user_panel") }}</span>
 
                 <svg
                   class=""
@@ -119,33 +117,32 @@
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/kira-panel"
                 >
-                  Kira Yönetimi
+                  {{ t("menu.rent_panel") }}
                 </RouterLink>
-
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/payment"
                 >
-                  Ödeme Yap
+                  {{ t("menu.payment") }}
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/contact"
                 >
-                  İletişime Geç
+                  {{ t("menu.contact") }}
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/login"
                 >
-                  Giriş Yap
+                  {{ t("menu.login") }}
                 </RouterLink>
                 <RouterLink
                   @click="logout"
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/login"
                 >
-                  Çıkış Yap
+                  {{ t("menu.logout") }}
                 </RouterLink>
               </div>
             </div>
@@ -158,8 +155,14 @@
 <script>
 import axiosInstance from "@/lib/axios";
 import box from "@/store/box.js";
+import { useI18n } from "vue-i18n";
 
 export default {
+  setup() {
+    const { t } = useI18n(); // i18n fonksiyonuna useI18n ile erişiyoruz
+
+    return { t }; // t fonksiyonunu template içinde kullanılmak üzere döndürüyoruz
+  },
   data() {
     return {
       user: {},
@@ -179,14 +182,14 @@ export default {
         if (response.status === 200) {
           // Çıkış başarılı
           console.log("Çıkış başarılı.");
-          box.addSuccess("Tebrikler", "Çıkış Başarılı!");
+          box.addSuccess(this.t("success.congrats"), this.t("success.logout"));
         } else {
           console.error("Çıkış sırasında bir hata oluştu.");
-          box.addError("Üzgünüm", "Bir Hata Oluştu!");
+          box.addError(this.t("errors.sorry"), this.t("errors.general"));
         }
       } catch (error) {
         console.error("Çıkış sırasında bir hata oluştu:", error);
-        box.addError("Üzgünüm", "Bir Hata Oluştu!");
+        box.addError(this.t("errors.sorry"), this.t("errors.general"));
       }
     },
   },
