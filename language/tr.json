@@ -61,7 +61,7 @@
     "build_name": "Bina Adı",
     "build_owner": "Bina Sahibi",
     "sms_rent_msg": "SMS ile kira hatırlat",
-    "mail_rent_msg": "E-Posta ile aidat hatırlat",
+    "mail_rent_msg": "E-Posta ile kira hatırlat",
     "sms_dues_msg": "SMS ile aidat hatırlat",
     "mail_dues_msg": "E-Posta ile aidat hatırlat",
     "rent_check": "Kira ödemesi yapıldı mı ?",
