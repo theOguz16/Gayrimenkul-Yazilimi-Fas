@@ -84,9 +84,6 @@ import binaListesiData from "@/data/binaListesi.json";
 import { useI18n } from "vue-i18n";
 
 const uyariTuruData = {
-  istek: {
-    key: "SMS ile Uyar",
-  },
   sikayet: {
     key: "E-Posta ile Uyar",
   },

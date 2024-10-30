@@ -74,9 +74,9 @@
         >
           <div
             id="bilgilendirme"
-            class="flex flex-col gap-2 justify-center max-sm:w-full max-sm:text-center max-sm:items-center max-2xl:w-full max-2xl:text-center max-2xl:items-center"
+            class="flex flex-col gap-2 max-sm:w-full max-sm:text-center max-sm:items-center max-2xl:w-full max-2xl:text-center max-2xl:items-center"
           >
-            <div @click="sendKiraSMS" class="cursor-pointer">
+            <!-- <div @click="sendKiraSMS" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
                   <span class="font-semibold">{{ user.buildName }},</span>
@@ -84,7 +84,7 @@
                 </p>
                 <fai class="text-lg max-sm:text-[16px]" icon="message"></fai>
               </div>
-            </div>
+            </div> -->
             <div @click="sendKiraEmail" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
@@ -94,7 +94,7 @@
                 <fai class="text-lg max-sm:text-[16px]" icon="envelope"></fai>
               </div>
             </div>
-            <div @click="sendAidatSMS" class="cursor-pointer">
+            <!-- <div @click="sendAidatSMS" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
                   <span class="font-semibold">{{ user.buildName }},</span>
@@ -102,7 +102,7 @@
                 </p>
                 <fai class="text-lg max-sm:text-[16px]" icon="message"></fai>
               </div>
-            </div>
+            </div> -->
             <div @click="sendAidatEmail" class="cursor-pointer">
               <div class="flex items-center gap-2">
                 <p class="text-lg max-sm:text-[16px]">
