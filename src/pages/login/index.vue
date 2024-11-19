@@ -54,7 +54,7 @@ export default {
   <div>
     <div class="container flex bg-white mt-14 p-0 max-sm:flex-col">
       <div id="image-container" class="w-[50%] max-sm:mb-8 max-sm:w-full">
-        <img src="image/fasimg.png" alt="login-image" />
+        <img src="/image/fasimg.png" alt="login-image" />
       </div>
       <div id="form-container" class="my-auto mx-auto">
         <form @submit.prevent="login" class="flex flex-col gap-4">

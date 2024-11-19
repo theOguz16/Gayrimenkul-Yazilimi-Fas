@@ -8,7 +8,7 @@
       id="image-container"
       class="max-2xl:flex max-2xl:items-center ax-sm:mb-8 max-sm:w-full"
     >
-      <img src="image/fasimg.png" alt="login-image" />
+      <img src="/image/fasimg.png" alt="login-image" />
     </div>
     <div
       id="contact"

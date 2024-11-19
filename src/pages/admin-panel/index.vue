@@ -48,7 +48,7 @@
           </ul>
         </div>
         <div class="w-[50%]">
-          <img src="public/image/fasimg.png" alt="404-img" />
+          <img src="/image/fasimg.png" alt="404-img" />
         </div>
       </div>
     </div>
