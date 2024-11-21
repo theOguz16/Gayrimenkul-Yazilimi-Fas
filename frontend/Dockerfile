@@ -1,16 +1,14 @@
-# Base image
-FROM node:18 as build
+FROM node:18 
 
 WORKDIR /app
 
-COPY ../package*.json ./
+
+COPY package*.json ./
+COPY vite.config.js ./vite.config.js
 
 RUN npm install
-
-COPY . .
-
-RUN npm run build
 
 EXPOSE 5173
 
 CMD [ "yarn", "dev", "--host" ]
+
