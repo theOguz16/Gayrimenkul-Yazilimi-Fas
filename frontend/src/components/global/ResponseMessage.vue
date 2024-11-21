@@ -1,5 +1,5 @@
 <script setup>
-import { deleteToast } from "@/store/widget/toast.js";
+import { deleteToast } from "../../store/widget/toast.js";
 import { onMounted } from "vue";
 const props = defineProps({
   toastData: {

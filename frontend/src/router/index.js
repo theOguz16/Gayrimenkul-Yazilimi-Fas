@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "~pages";
-import axiosInstance from "@/lib/axios";
+import axiosInstance from "../lib/axios.js";
 
 const router = createRouter({
   history: createWebHistory(),

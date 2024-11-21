@@ -30,17 +30,17 @@ const i18n = createI18n({
 });
 
 // Bileşenler
-import InputText from "./components/forms/InputText.vue";
+import InputText from "../src/components/forms/InputText.vue";
 import InputButton from "./components/forms/InputButton.vue";
-import InputDate from "./components/forms/InputDate.vue";
-import InputSelect from "./components/forms/InputSelect.vue";
-import InputTextarea from "./components/forms/InputTextarea.vue";
-import InputFile from "./components/forms/InputFile.vue";
-import Header from "./components/global/Header.vue";
+import InputDate from "../src/components/forms/InputDate.vue";
+import InputSelect from "../src/components/forms/InputSelect.vue";
+import InputTextarea from "../src/components/forms/InputTextarea.vue";
+import InputFile from "../src/components/forms/InputFile.vue";
+import Header from "../src/components/global/Header.vue";
 
 // Font Awesome
-import "@/lib/fontAwesome";
-import "@/lib/fontAwesomeRegular";
+import "../src/lib/fontAwesome.js";
+import "../src/lib/fontAwesomeRegular";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const app = createApp(App);

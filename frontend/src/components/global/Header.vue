@@ -4,7 +4,11 @@
       <div class="flex items-center justify-between">
         <div>
           <RouterLink to="/">
-            <img class="w-[3.5rem]" src="/image/fas-logo.png" alt="Logo" />
+            <img
+              class="w-[3.5rem]"
+              src="../../../public/image/fas-logo.png"
+              alt="Logo"
+            />
           </RouterLink>
         </div>
         <div>
@@ -153,8 +157,8 @@
   </header>
 </template>
 <script>
-import axiosInstance from "@/lib/axios";
-import box from "@/store/box.js";
+import axiosInstance from "../../lib/axios.js";
+import box from "../../store/box.js";
 import { useI18n } from "vue-i18n";
 
 export default {
