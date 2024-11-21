@@ -15,8 +15,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: frontend/Dockerfile
+      context: ./frontend
+    container_name: frontend
     ports:
       - "5173:5173" # Frontend için dış port 5173
     restart: always
