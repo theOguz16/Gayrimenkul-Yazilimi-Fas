@@ -13,7 +13,7 @@ services:
       - mongo
     restart: always
 
-  frontend:
+  src:
     build:
       context: ./src
     container_name: frontend
