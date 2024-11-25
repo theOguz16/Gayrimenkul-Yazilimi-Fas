@@ -62,7 +62,7 @@ export default {
     async fetchBinaDurumlari() {
       try {
         const response = await axiosInstance.get(
-          "http://localhost:3000/binalar"
+          "https://faspanel.com/binalar"
         );
 
         this.binaDurumlari = response.data.reduce((acc, bina) => {
@@ -79,7 +79,7 @@ export default {
     },
     async updateCheckboxes() {
       const response = await axiosInstance.get(
-        `http://localhost:3000/binalar/${this.currentBuildingName}`
+        `https://faspanel.com/binalar/${this.currentBuildingName}`
       );
 
       // Gelen veriler ile kira ve aidat checkboxlarını güncelle.
@@ -97,7 +97,7 @@ export default {
 
       // Backend'deki /binalar endpoint'ine istek at
       const response = await axiosInstance.get(
-        `http://localhost:3000/binalar/${bina}`
+        `https://faspanel.com/binalar/${bina}`
       );
 
       // Gelen kullanıcı bilgilerini state'e atıyoruz

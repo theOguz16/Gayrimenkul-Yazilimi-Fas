@@ -140,7 +140,7 @@ export default {
   methods: {
     async contactUs() {
       try {
-        await axiosInstance.post("http://localhost:3000/contact-email", {
+        await axiosInstance.post("https://faspanel.com/contact-email", {
           name: this.name,
           surname: this.surname,
           emailAddres: this.emailAddres,

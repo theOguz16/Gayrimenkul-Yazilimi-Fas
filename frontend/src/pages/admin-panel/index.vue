@@ -77,7 +77,7 @@ export default {
   async mounted() {
     try {
       // Backend'deki /profile endpoint'ine istek at
-      const response = await axiosInstance.get("http://localhost:3000/profile");
+      const response = await axiosInstance.get("https://faspanel.com/profile");
 
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = response.data.user;
@@ -89,14 +89,14 @@ export default {
     try {
       // Backend'deki /profile endpoint'ine istek at
       const profileResponse = await axiosInstance.get(
-        "http://localhost:3000/profile"
+        "https://faspanel.com/profile"
       );
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = profileResponse.data.user;
 
       // Backend'deki /toplam-aidat endpoint'ine istek at
       const aidatResponse = await axiosInstance.get(
-        "http://localhost:3000/toplam-aidat"
+        "https://faspanel.com/toplam-aidat"
       );
       // Gelen toplam aidat bilgilerini state'e atıyoruz
       this.toplamPara = aidatResponse.data.toplamAidat;

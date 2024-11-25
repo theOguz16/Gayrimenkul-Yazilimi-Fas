@@ -124,7 +124,7 @@ export default {
       try {
         // Seçilen bina isimleri ile e-posta adreslerini almak için backend'e istek at
         const response = await axiosInstance.post(
-          "http://localhost:3000/get-emails",
+          "https://faspanel.com/get-emails",
           {
             buildings: this.selectedBuildings,
           }
@@ -134,7 +134,7 @@ export default {
         if (this.uyariTuruSecim === "E-Posta ile Uyar") {
           // E-posta ile uyarı gönderme işlemi
           for (const email of this.selectedUsers) {
-            await axiosInstance.post("http://localhost:3000/duyuru-email", {
+            await axiosInstance.post("https://faspanel.com/duyuru-email", {
               email: [email],
               subject: this.duyuruBasligi,
               message: this.duyuruAciklamasi,

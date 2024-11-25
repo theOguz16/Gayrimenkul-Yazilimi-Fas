@@ -29,7 +29,7 @@ router.beforeEach(async (to, from, next) => {
     } else {
       try {
         const response = await axiosInstance.get(
-          "http://localhost:3000/profile"
+          "https://faspanel.com/profile"
         );
         const userRole = response.data.user.role;
 

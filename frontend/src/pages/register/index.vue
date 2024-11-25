@@ -197,7 +197,7 @@ export default {
 
     async createUsers() {
       try {
-        const response = await axios.post("http://localhost:3000/register", {
+        const response = await axios.post("https://faspanel.com/register", {
           buildName: this.formData.buildName,
           name: this.formData.name,
           surname: this.formData.surname,
@@ -228,7 +228,7 @@ export default {
     },
     async fetchQuestions() {
       try {
-        const response = await axios.get("http://localhost:3000/register");
+        const response = await axios.get("https://faspanel.com/register");
         this.users = response.data;
       } catch (error) {
         console.error(error);
