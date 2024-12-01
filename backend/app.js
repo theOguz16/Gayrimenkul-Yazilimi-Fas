@@ -81,7 +81,6 @@ const User = require("./schema/User.js");
 
 //db bağlanma
 const mongoose = require("mongoose");
-const { log } = require("console");
 
 mongoose.connect("mongodb://localhost:27017/FAS", {});
 
