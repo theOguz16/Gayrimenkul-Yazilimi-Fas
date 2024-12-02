@@ -88,9 +88,7 @@ export default {
   async mounted() {
     try {
       // Backend'deki /profile endpoint'ine istek at
-      const profileResponse = await axiosInstance.get(
-      m"/profile"
-      );
+      const profileResponse = await axiosInstance.get("/api/profile");
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = profileResponse.data.user;
 
