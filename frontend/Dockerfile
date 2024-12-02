@@ -2,6 +2,8 @@
 FROM node:22-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
+
+
 RUN npm ci --prefer-offline
 
 COPY ./ ./
