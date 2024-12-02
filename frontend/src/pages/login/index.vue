@@ -24,7 +24,7 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await axios.post("https://faspanel.com/login", {
+        const response = await axios.post("/api/login", {
           buildName: this.buildName,
           password: this.password,
         });

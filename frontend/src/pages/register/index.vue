@@ -197,7 +197,7 @@ export default {
 
     async createUsers() {
       try {
-        const response = await axios.post("https://faspanel.com/register", {
+        const response = await axios.post("/api/register", {
           buildName: this.formData.buildName,
           name: this.formData.name,
           surname: this.formData.surname,

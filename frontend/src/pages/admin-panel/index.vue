@@ -89,7 +89,7 @@ export default {
     try {
       // Backend'deki /profile endpoint'ine istek at
       const profileResponse = await axiosInstance.get(
-        "https://faspanel.com/profile"
+      m"/profile"
       );
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = profileResponse.data.user;
