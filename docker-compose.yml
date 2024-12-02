@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  backend:
+  backend-1:
     build:
       context: ./backend
     container_name: backend-1
@@ -13,7 +13,7 @@ services:
       - mongo
     restart: always
 
-  frontend:
+  frontend-1:
     build:
       context: ./frontend
     container_name: frontend-1
