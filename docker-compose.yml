@@ -1,10 +1,10 @@
 version: "3.8"
 
 services:
-  backend-1:
+  backend-3:
     build:
       context: ./backend
-    container_name: backend-1
+    container_name: backend-3
     ports:
       - "3000:3000" # Backend için dış port 3000
     environment:
@@ -13,12 +13,12 @@ services:
       - mongo
     restart: always
 
-  frontend-1:
+  frontend-3:
     build:
       context: ./frontend
-    container_name: frontend-1
+    container_name: frontend-3
     depends_on:
-      - backend-1
+      - backend-3
     ports:
       - "5173:80" # Frontend için dış port 5173
     restart: always
