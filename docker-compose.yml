@@ -17,8 +17,6 @@ services:
     build:
       context: ./frontend
     container_name: frontend-3
-    depends_on:
-      - backend-3
     ports:
       - "5173:80" # Frontend için dış port 5173
     restart: always
