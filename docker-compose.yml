@@ -7,6 +7,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`www.faspanel.com`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
+      - "traefik.docker.network=default"
+
     restart: always
 
   backend:
@@ -17,6 +19,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=(Host(`www.faspanel.com`) && PathPrefix(`/api`))"
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
+      - "traefik.docker.network=default"
     environment:
       - MONGO_URI=mongodb://mongo:27017/FAS
     depends_on:
