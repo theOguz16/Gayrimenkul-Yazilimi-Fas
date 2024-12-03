@@ -7,8 +7,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`www.faspanel.com`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
-      - "traefik.docker.network=default"
-
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls=true"
     restart: always
 
   backend:
@@ -19,7 +19,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=(Host(`www.faspanel.com`) && PathPrefix(`/api`))"
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
-      - "traefik.docker.network=default"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls=true"
     environment:
       - MONGO_URI=mongodb://mongo:27017/FAS
     depends_on:
@@ -40,11 +41,15 @@ services:
     container_name: traefik
     ports:
       - "80:80"
+      - "443:443" 
       - "8080:8080" # Traefik dashboard
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
+        - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=oguzhanuyar531@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     restart: always
