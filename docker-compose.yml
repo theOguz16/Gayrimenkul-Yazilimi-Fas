@@ -16,9 +16,8 @@ services:
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./letsencrypt:/letsencrypt"
     restart: always
-    
+
   frontend:
     build:
       context: ./frontend
@@ -31,6 +30,8 @@ services:
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
     restart: always
+    depends_on:
+      - traefik
 
   backend:
     build:
@@ -47,6 +48,8 @@ services:
       - MONGO_URI=mongodb://mongo:27017/FAS
     depends_on:
       - mongo
+      - traefik
+
     restart: always
 
   mongo:
