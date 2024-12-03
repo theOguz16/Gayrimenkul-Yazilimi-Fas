@@ -1,6 +1,16 @@
 version: "3.9"
 
 services:
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`www.faspanel.com`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    restart: always
+
   backend:
     build:
       context: ./backend
@@ -13,16 +23,6 @@ services:
       - MONGO_URI=mongodb://mongo:27017/FAS
     depends_on:
       - mongo
-    restart: always
-
-  frontend:
-    build:
-      context: ./frontend
-    container_name: frontend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`www.faspanel.com`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=80"
     restart: always
 
   mongo:
