@@ -1,28 +1,24 @@
-version: "3.9"
+version: "3.8"
 
 services:
-  backend:
+  backend-3:
     build:
       context: ./backend
-    container_name: backend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`www.faspanel.com`) && PathPrefix(`/api`)"
-      - "traefik.http.services.backend.loadbalancer.server.port=3000"
+    container_name: backend-3
+    ports:
+      - "3001:3000" # Backend için dış port 3000
     environment:
       - MONGO_URI=mongodb://mongo:27017/FAS
     depends_on:
       - mongo
     restart: always
 
-  frontend:
+  frontend-3:
     build:
       context: ./frontend
-    container_name: frontend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`www.faspanel.com`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    container_name: frontend-3
+    ports:
+      - "5173:80" # Frontend için dış port 5173
     restart: always
 
   mongo:
@@ -32,20 +28,6 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
-    restart: always
-
-  traefik:
-    image: traefik:v3.2
-    container_name: traefik
-    ports:
-      - "80:80"
-      - "8080:8080" # Traefik dashboard
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     restart: always
 
 volumes:
