@@ -68,7 +68,7 @@ app.get("/profile", middlewareAuth, async function (req, res) {
 });
 
 const { MongoClient } = require("mongodb");
-const uri = "mongodb://localhost:27017/FAS"; // MongoDB URI
+const uri = "mongodb://mongo:27017/FAS"; // MongoDB URI
 const client = new MongoClient(uri);
 
 // Şema tanımlanmış yerin yolunu ekleyin
@@ -82,7 +82,7 @@ const User = require("./schema/User.js");
 //db bağlanma
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/FAS", {});
+mongoose.connect("mongodb://mongo:27017/FAS", {});
 
 const db = mongoose.connection;
 
