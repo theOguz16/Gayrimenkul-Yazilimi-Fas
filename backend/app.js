@@ -94,7 +94,7 @@ db.once("open", () => {
 //istekler
 
 //Login
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { buildName, password } = req.body;
 
   try {
