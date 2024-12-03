@@ -94,7 +94,7 @@ db.once("open", () => {
 //istekler
 
 //Login
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { buildName, password } = req.body;
 
   try {
@@ -137,7 +137,7 @@ app.post("/logout", middlewareAuth, (req, res) => {
 //Register
 
 // Middleware'ı "/register" endpoint'i ile birleştirin
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   try {
     // Gelen verileri kullanarak yeni bir user oluşturun
     const newUser = new User({
@@ -171,7 +171,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/register", async (req, res) => {
+app.get("/api/register", async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -180,7 +180,7 @@ app.get("/register", async (req, res) => {
   }
 });
 // Tüm binaları listeleyen rota: /binalar
-app.get("/binalar", middlewareAuth, async (req, res) => {
+app.get("/api/binalar", middlewareAuth, async (req, res) => {
   try {
     const binalar = await User.find(); // Kullanıcı modelinin tüm verilerini alıyoruz
 
@@ -192,7 +192,7 @@ app.get("/binalar", middlewareAuth, async (req, res) => {
 });
 
 // Dinamik rota: /binalar/:buildName
-app.get("/binalar/:buildName", middlewareAuth, async (req, res) => {
+app.get("/api/binalar/:buildName", middlewareAuth, async (req, res) => {
   const { buildName } = req.params;
 
   try {
@@ -207,7 +207,7 @@ app.get("/binalar/:buildName", middlewareAuth, async (req, res) => {
 });
 
 // Aidatları toplama fonksiyonu
-app.get("/toplam-aidat", middlewareAuth, async (req, res) => {
+app.get("/api/toplam-aidat", middlewareAuth, async (req, res) => {
   try {
     // Tüm kullanıcıları veritabanından çek ve aidat miktarlarını topla
     const users = await User.find({});
@@ -222,58 +222,70 @@ app.get("/toplam-aidat", middlewareAuth, async (req, res) => {
   }
 });
 
-app.post("/binalar/:bina/kiraCheckbox", middlewareAuth, async (req, res) => {
-  const { kiraCheckbox } = req.body;
-  const { bina } = req.params; // Parametredeki bina adı alınır
-  try {
-    // Binayı güncelleyin
-    const updatedUser = await User.findOneAndUpdate(
-      { buildName: bina }, // Bina adına göre bul
-      { kiraCheckbox: kiraCheckbox }, // Güncellenen alanlar
-      { new: true } // Yeni bina nesnesini döndür
-    );
+app.post(
+  "/api/binalar/:bina/kiraCheckbox",
+  middlewareAuth,
+  async (req, res) => {
+    const { kiraCheckbox } = req.body;
+    const { bina } = req.params; // Parametredeki bina adı alınır
+    try {
+      // Binayı güncelleyin
+      const updatedUser = await User.findOneAndUpdate(
+        { buildName: bina }, // Bina adına göre bul
+        { kiraCheckbox: kiraCheckbox }, // Güncellenen alanlar
+        { new: true } // Yeni bina nesnesini döndür
+      );
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User bulunamadı." });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User bulunamadı." });
+      }
+
+      res.json({
+        message: "Bina başarıyla güncellendi.",
+        user: updatedUser,
+      });
+    } catch (error) {
+      console.error("Güncelleme hatası:", error); // Detaylı hata mesajı
+      res
+        .status(500)
+        .json({ message: "Güncelleme sırasında bir hata oluştu." });
     }
-
-    res.json({
-      message: "Bina başarıyla güncellendi.",
-      user: updatedUser,
-    });
-  } catch (error) {
-    console.error("Güncelleme hatası:", error); // Detaylı hata mesajı
-    res.status(500).json({ message: "Güncelleme sırasında bir hata oluştu." });
   }
-});
+);
 
-app.post("/binalar/:bina/aidatCheckbox", middlewareAuth, async (req, res) => {
-  const { aidatCheckbox } = req.body;
-  const { bina } = req.params; // Parametredeki bina adı alınır
+app.post(
+  "/api/binalar/:bina/aidatCheckbox",
+  middlewareAuth,
+  async (req, res) => {
+    const { aidatCheckbox } = req.body;
+    const { bina } = req.params; // Parametredeki bina adı alınır
 
-  try {
-    // Binayı güncelleyin
-    const updatedUser = await User.findOneAndUpdate(
-      { buildName: bina }, // Bina adına göre bul
-      { aidatCheckbox: aidatCheckbox }, // Güncellenen alanlar
-      { new: true } // Yeni bina nesnesini döndür
-    );
+    try {
+      // Binayı güncelleyin
+      const updatedUser = await User.findOneAndUpdate(
+        { buildName: bina }, // Bina adına göre bul
+        { aidatCheckbox: aidatCheckbox }, // Güncellenen alanlar
+        { new: true } // Yeni bina nesnesini döndür
+      );
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "Bina bulunamadı." });
+      if (!updatedUser) {
+        return res.status(404).json({ message: "Bina bulunamadı." });
+      }
+
+      res.json({
+        message: "Bina başarıyla güncellendi.",
+        user: updatedUser,
+      });
+    } catch (error) {
+      console.error("Güncelleme hatası:", error); // Detaylı hata mesajı
+      res
+        .status(500)
+        .json({ message: "Güncelleme sırasında bir hata oluştu." });
     }
-
-    res.json({
-      message: "Bina başarıyla güncellendi.",
-      user: updatedUser,
-    });
-  } catch (error) {
-    console.error("Güncelleme hatası:", error); // Detaylı hata mesajı
-    res.status(500).json({ message: "Güncelleme sırasında bir hata oluştu." });
   }
-});
+);
 
-app.post("/send-email", async (req, res) => {
+app.post("/api/send-email", async (req, res) => {
   const { email, subject, message } = req.body;
 
   // Nodemailer transporter ayarları
@@ -305,7 +317,7 @@ app.post("/send-email", async (req, res) => {
   }
 });
 //Duyuruları e-mail ile
-app.post("/duyuru-email", async (req, res) => {
+app.post("/api/duyuru-email", async (req, res) => {
   const { email, subject, message } = req.body;
 
   // Nodemailer transporter ayarları
@@ -337,7 +349,7 @@ app.post("/duyuru-email", async (req, res) => {
   }
 });
 //contact e-mail ile
-app.post("/contact-email", async (req, res) => {
+app.post("/api/contact-email", async (req, res) => {
   const { name, surname, emailAddres, telNo, subject, buildName, message } =
     req.body;
 
@@ -374,7 +386,7 @@ app.post("/contact-email", async (req, res) => {
 });
 
 //E-postaları bulmak için
-app.post("/get-emails", middlewareAuth, async (req, res) => {
+app.post("/api/get-emails", middlewareAuth, async (req, res) => {
   const { buildings } = req.body; // İstek gövdesinden bina isimlerini al
   try {
     // Bina isimlerine göre kullanıcıları bul

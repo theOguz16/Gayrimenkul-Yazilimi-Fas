@@ -28,9 +28,7 @@ router.beforeEach(async (to, from, next) => {
       router.push("/"); // Ana sayfaya yönlendir
     } else {
       try {
-        const response = await axiosInstance.get(
-          "https://faspanel.com/profile"
-        );
+        const response = await axiosInstance.get("/api/profile");
         const userRole = response.data.user.role;
 
         if (to.path.startsWith("/binalar") && userRole !== "Admin") {

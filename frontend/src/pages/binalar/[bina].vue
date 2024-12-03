@@ -185,7 +185,7 @@ export default {
           message: `Merhaba, ${this.user.buildName} binası için kira ödemesi yapılmamıştır. Lütfen en kısa sürede ödeme yapın.`, // Mesaj
         };
 
-        await axiosInstance.post("https://faspanel.com/send-email", emailData);
+        await axiosInstance.post("/api/send-email", emailData);
         box.addSuccess(
           this.t("success.congrats"),
           this.t("messages.rent_message")
@@ -203,7 +203,7 @@ export default {
           message: `Merhaba, ${this.user.buildName} binası için aidat ödemesi yapılmamıştır. Lütfen en kısa sürede ödeme yapın.`, // Mesaj
         };
 
-        await axiosInstance.post("https://faspanel.com/send-email", emailData);
+        await axiosInstance.post("/api/send-email", emailData);
         box.addSuccess(
           this.t("success.congrats"),
           this.t("messages.dues_message")
@@ -220,7 +220,7 @@ export default {
           message: `Merhaba, ${this.user.buildName} binası için kira ödemesi yapılmamıştır. Lütfen en kısa sürede ödeme yapın.`,
         };
 
-        await axiosInstance.post("https://faspanel.com/send-kira-sms", smsData);
+        await axiosInstance.post("/api/send-kira-sms", smsData);
         box.addSuccess(this.t("success.congrats"), this.t("messages.sms_rent"));
       } catch (error) {
         box.addError(this.t("errors.sorry"), this.t("errors.general"));
@@ -234,10 +234,7 @@ export default {
           message: `Merhaba, ${this.user.buildName} binası için aidat ödemesi yapılmamıştır. Lütfen en kısa sürede ödeme yapın.`,
         };
 
-        await axiosInstance.post(
-          "https://faspanel.com/send-aidat-sms",
-          smsData
-        );
+        await axiosInstance.post("/api/send-aidat-sms", smsData);
         box.addSuccess(this.t("success.congrats"), this.t("messages.sms_dues"));
       } catch (error) {
         box.addError(this.t("errors.sorry"), this.t("errors.general"));
@@ -248,7 +245,7 @@ export default {
       try {
         const buildName = this.$route.params;
         const response = await axiosInstance.post(
-          `https://faspanel.com/binalar/${buildName.bina}/kiraCheckbox`,
+          `/api/binalar/${buildName.bina}/kiraCheckbox`,
           { kiraCheckbox: this.kiraCheckbox }
         );
         box.addSuccess(
@@ -267,7 +264,7 @@ export default {
       try {
         const buildName = this.$route.params;
         const response = await axiosInstance.post(
-          `https://faspanel.com/binalar/${buildName.bina}/aidatCheckbox`,
+          `/api/binalar/${buildName.bina}/aidatCheckbox`,
           { aidatCheckbox: this.aidatCheckbox }
         );
         box.addSuccess(
@@ -289,7 +286,7 @@ export default {
     try {
       // Backend'deki /binalar endpoint'ine istek at
       const response = await axiosInstance.get(
-        `https://faspanel.com/binalar/${buildName.bina}`
+        `/api/binalar/${buildName.bina}`
       );
 
       // Gelen kullanıcı bilgilerini state'e atıyoruz

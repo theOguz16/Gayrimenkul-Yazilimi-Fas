@@ -123,18 +123,15 @@ export default {
     async duyuruOlustur() {
       try {
         // Seçilen bina isimleri ile e-posta adreslerini almak için backend'e istek at
-        const response = await axiosInstance.post(
-          "https://faspanel.com/get-emails",
-          {
-            buildings: this.selectedBuildings,
-          }
-        );
+        const response = await axiosInstance.post("/api/get-emails", {
+          buildings: this.selectedBuildings,
+        });
 
         this.selectedUsers = response.data.emails; // Backend'den alınan e-posta adreslerini sakla
         if (this.uyariTuruSecim === "E-Posta ile Uyar") {
           // E-posta ile uyarı gönderme işlemi
           for (const email of this.selectedUsers) {
-            await axiosInstance.post("https://faspanel.com/duyuru-email", {
+            await axiosInstance.post("/api/duyuru-email", {
               email: [email],
               subject: this.duyuruBasligi,
               message: this.duyuruAciklamasi,

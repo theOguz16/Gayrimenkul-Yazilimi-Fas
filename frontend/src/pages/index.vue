@@ -20,7 +20,7 @@ export default {
   methods: {},
   async mounted() {
     try {
-      const response = await axiosInstance.get("https://faspanel.com/profile");
+      const response = await axiosInstance.get("/api/profile");
       this.user = response.data.user;
 
       // Rolüne göre yönlendirme

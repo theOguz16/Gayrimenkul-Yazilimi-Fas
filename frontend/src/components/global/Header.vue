@@ -179,9 +179,7 @@ export default {
 
       // Sunucuya çıkış isteği gönder (isteğe bağlı)
       try {
-        const response = await axiosInstance.post(
-          "https://faspanel.com/logout"
-        );
+        const response = await axiosInstance.post("/api/logout");
 
         if (response.status === 200) {
           // Çıkış başarılı
@@ -200,7 +198,7 @@ export default {
   async mounted() {
     try {
       // Backend'deki /profile endpoint'ine istek at
-      const response = await axiosInstance.get("https://faspanel.com/profile");
+      const response = await axiosInstance.get("/api/profile");
 
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = response.data.user;

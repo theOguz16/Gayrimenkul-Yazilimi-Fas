@@ -228,7 +228,7 @@ export default {
     },
     async fetchQuestions() {
       try {
-        const response = await axios.get("https://faspanel.com/register");
+        const response = await axios.get("/api/register");
         this.users = response.data;
       } catch (error) {
         console.error(error);
