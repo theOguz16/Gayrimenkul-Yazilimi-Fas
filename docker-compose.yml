@@ -17,7 +17,7 @@ services:
     container_name: backend
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`www.faspanel.com`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.rule=(Host(`www.faspanel.com`) && PathPrefix(`/api`))"
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
     environment:
       - MONGO_URI=mongodb://mongo:27017/FAS
