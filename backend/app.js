@@ -61,7 +61,7 @@ app.use(cors(corsOptions));
 
 //KIRACI LINKINE GONDER
 
-app.get("/profile", middlewareAuth, async function (req, res) {
+app.get("/api/profile", middlewareAuth, async function (req, res) {
   return res.json({
     user: req.user,
   });
@@ -130,7 +130,7 @@ app.post("/api/login", async (req, res) => {
 });
 
 //logout
-app.post("/logout", middlewareAuth, (req, res) => {
+app.post("/api/logout", middlewareAuth, (req, res) => {
   res.status(200).json({ message: "Çıkış başarılı." });
 });
 
