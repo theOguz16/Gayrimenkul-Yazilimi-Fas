@@ -31,6 +31,10 @@ router.beforeEach(async (to, from, next) => {
         const response = await axiosInstance.get("/api/profile");
         const userRole = response.data.user.role;
 
+        if (to.fullPath === "/announcement" && userRole === "User") {
+          return next({ path: "/404" }); // 404 sayfasına yönlendir
+        }
+
         if (to.path.startsWith("/binalar") && userRole !== "Admin") {
           next({ path: "/404" });
         } else {
