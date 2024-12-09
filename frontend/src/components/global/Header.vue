@@ -43,7 +43,7 @@
               </button>
 
               <div
-                class="absolute z-50 opacity-0 invisible transition-opacity duration-300 transform scale-95 min-w-56 bg-site-color-green shadow-md rounded-lg p-1 mt-2 group-hover:opacity-100 group-hover:visible group-hover:scale-100 top-[42px]"
+                class="absolute z-50 opacity-0 invisible transition-opacity duration-300 transform scale-95 min-w-48 bg-site-color-green shadow-md rounded-lg p-1 mt-2 group-hover:opacity-100 group-hover:visible group-hover:scale-100 top-[42px]"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="hs-dropdown-hover-event"
