@@ -50,11 +50,11 @@
         </div>
       </div>
       <div id="butonlar" class="flex gap-3 items-center">
-        <RouterLink
+        <!-- <RouterLink
           to="/payment"
           class="bg-site-color-green text-white rounded-md py-2 px-3"
           >{{ t("menu.payment") }}</RouterLink
-        >
+        > -->
         <RouterLink
           to="/contact"
           class="bg-[#D70040] text-white rounded-md py-2 px-3"

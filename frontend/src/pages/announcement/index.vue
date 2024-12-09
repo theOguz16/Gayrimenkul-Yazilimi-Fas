@@ -1,79 +1,81 @@
 <template>
-  <Header></Header>
-  <div
-    class="container mt-6 flex gap-8 items-start justify-center flex-row max-sm:p-4 max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:text-center"
-  >
-    <div class="bg-white">
-      <div class="cursor-pointer" id="duyuru-header">
-        <h1 class="p-4 text-center text-site-color-green max-sm:w-full">
-          {{ t("ann.title") }}
-        </h1>
-      </div>
-      <form @submit.prevent="duyuruOlustur">
-        <div
-          id="duyuru-olustur"
-          class="flex flex-col gap-4 py-8 p-24 max-sm:p-8"
-        >
-          <div>
-            <InputText
-              v-model="duyuruBasligi"
-              :placeholder="t('ann.header')"
-              :label="t('ann.header')"
-              type="text"
-              required
-              field="title"
-            ></InputText>
-          </div>
-          <div>
-            <InputTextarea
-              v-model="duyuruAciklamasi"
-              :placeholder="t('ann.explain')"
-              :label="t('ann.explain')"
-              type="text"
-            ></InputTextarea>
-          </div>
-          <div>
-            <InputSelect
-              v-model="uyariTuruSecim"
-              :items="Object.values(uyariTuru)"
-              itemKey="key"
-              itemValue="key"
-              :label="t('ann.type')"
-              :defaultOptions="t('ann.type')"
-              required
-            ></InputSelect>
-          </div>
-          <div>
-            <span
-              class="text-site-color-dark font-semibold flex justify-center"
-              >{{ t("ann.members") }}</span
-            >
-            <li
-              v-for="item in binaListesi"
-              :key="item.name"
-              class="border-b-2 px-6 py-6 flex items-center gap-3"
-            >
-              <span
-                class="font-bold text-sm text-site-color-dark transition-all"
-                >{{ item.name }}</span
-              >
-              <input
-                @change="uyariGonder(item.name, $event.target.checked)"
-                id="uyari-checkbox"
-                type="checkbox"
-                class="h-4 w-4 text-site-color-green bg-gray-100 border-gray-300 rounded focus:ring-site-color-green checked:bg-site-color-green checked:text-site-color-green"
-              />
-            </li>
-          </div>
-          <div class="flex justify-center">
-            <InputButton
-              class="bg-site-color-green text-white w-full outline-none"
-              type="submit"
-              :text="t('ann.create')"
-            ></InputButton>
-          </div>
+  <div v-if="this.user.role === 'Admin'">
+    <Header></Header>
+    <div
+      class="container mt-6 flex gap-8 items-start justify-center flex-row max-sm:p-4 max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:text-center"
+    >
+      <div class="bg-white">
+        <div class="cursor-pointer" id="duyuru-header">
+          <h1 class="p-4 text-center text-site-color-green max-sm:w-full">
+            {{ t("ann.title") }}
+          </h1>
         </div>
-      </form>
+        <form @submit.prevent="duyuruOlustur">
+          <div
+            id="duyuru-olustur"
+            class="flex flex-col gap-4 py-8 p-24 max-sm:p-8"
+          >
+            <div>
+              <InputText
+                v-model="duyuruBasligi"
+                :placeholder="t('ann.header')"
+                :label="t('ann.header')"
+                type="text"
+                required
+                field="title"
+              ></InputText>
+            </div>
+            <div>
+              <InputTextarea
+                v-model="duyuruAciklamasi"
+                :placeholder="t('ann.explain')"
+                :label="t('ann.explain')"
+                type="text"
+              ></InputTextarea>
+            </div>
+            <div>
+              <InputSelect
+                v-model="uyariTuruSecim"
+                :items="Object.values(uyariTuru)"
+                itemKey="key"
+                itemValue="key"
+                :label="t('ann.type')"
+                :defaultOptions="t('ann.type')"
+                required
+              ></InputSelect>
+            </div>
+            <div>
+              <span
+                class="text-site-color-dark font-semibold flex justify-center"
+                >{{ t("ann.members") }}</span
+              >
+              <li
+                v-for="item in binaListesi"
+                :key="item.name"
+                class="border-b-2 px-6 py-6 flex items-center gap-3"
+              >
+                <span
+                  class="font-bold text-sm text-site-color-dark transition-all"
+                  >{{ item.name }}</span
+                >
+                <input
+                  @change="uyariGonder(item.name, $event.target.checked)"
+                  id="uyari-checkbox"
+                  type="checkbox"
+                  class="h-4 w-4 text-site-color-green bg-gray-100 border-gray-300 rounded focus:ring-site-color-green checked:bg-site-color-green checked:text-site-color-green"
+                />
+              </li>
+            </div>
+            <div class="flex justify-center">
+              <InputButton
+                class="bg-site-color-green text-white w-full outline-none"
+                type="submit"
+                :text="t('ann.create')"
+              ></InputButton>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -104,6 +106,7 @@ export default {
       duyuruBasligi: "",
       duyuruAciklamasi: "",
       uyariTuruSecim: "",
+      user: {},
     };
   },
   created() {
@@ -151,6 +154,20 @@ export default {
       }
     },
   },
-  async mounted() {},
+  async mounted() {
+    try {
+      // Backend'deki /profile endpoint'ine istek at
+      const response = await axiosInstance.get("/api/profile");
+
+      // Gelen kullanıcı bilgilerini state'e atıyoruz
+      this.user = response.data.user;
+      // Kullanıcı rolünü kontrol et
+      if (this.user.role === "Admin") {
+        this.$router.push("/admin-panel");
+      }
+    } catch (error) {
+      console.error("Kullanıcı bilgileri alınamadı:", error);
+    }
+  },
 };
 </script>

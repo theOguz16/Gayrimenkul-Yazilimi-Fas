@@ -123,12 +123,12 @@
                 >
                   {{ t("menu.rent_panel") }}
                 </RouterLink>
-                <RouterLink
+                <!-- <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/payment"
                 >
                   {{ t("menu.payment") }}
-                </RouterLink>
+                </RouterLink> -->
                 <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/contact"
