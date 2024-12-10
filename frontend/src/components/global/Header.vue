@@ -43,38 +43,38 @@
               </button>
 
               <div
-                class="absolute z-50 opacity-0 invisible transition-opacity duration-300 transform scale-95 min-w-48 bg-site-color-green shadow-md rounded-lg p-1 mt-2 group-hover:opacity-100 group-hover:visible group-hover:scale-100 top-[42px]"
+                class="absolute z-50 opacity-0 invisible transition-opacity duration-300 transform scale-95 min-w-[180px] bg-site-color-green shadow-md rounded-lg p-1 mt-2 group-hover:opacity-100 group-hover:visible group-hover:scale-100 top-[42px]"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="hs-dropdown-hover-event"
               >
                 <RouterLink
-                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/admin-panel"
                 >
                   {{ t("menu.admin_panel") }}
                 </RouterLink>
                 <RouterLink
-                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/announcement"
                 >
                   {{ t("menu.announcement") }}
                 </RouterLink>
                 <RouterLink
-                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/register"
                 >
                   {{ t("menu.register") }}
                 </RouterLink>
                 <RouterLink
-                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/login"
                 >
                   {{ t("menu.login") }}
                 </RouterLink>
                 <RouterLink
                   @click="logout"
-                  class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
+                  class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/login"
                 >
                   {{ t("menu.logout") }}
