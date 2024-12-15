@@ -7,7 +7,7 @@
     <ul class="flex flex-col bg-white rounded-[5px] w-full">
       <li
         :class="getBackgroundClass(item.name)"
-        v-for="item in binaListesi"
+        v-for="item in filteredBinaListesi"
         class="border-b-2 px-6 py-6"
       >
         <RouterLink
@@ -40,6 +40,14 @@ export default {
       currentBuildingName: "",
       binaDurumlari: [],
     };
+  },
+  computed: {
+    filteredBinaListesi() {
+      const excludedNames = ["BinaA", "BinaB", "BinaC"];
+      return this.binaListesi.filter(
+        (bina) => !excludedNames.includes(bina.name)
+      );
+    },
   },
   created() {
     this.binaListesi = binaListesiData; // JSON verisini burada atıyoruz

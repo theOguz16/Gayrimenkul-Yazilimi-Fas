@@ -1,7 +1,7 @@
 <template>
   <Header></Header>
   <div
-    class="container mt-6 flex gap-8 items-start justify-center flex-row max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center"
+    class="container mt-6 flex gap-8 items-start flex-row max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center"
   >
     <div
       class="max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center"

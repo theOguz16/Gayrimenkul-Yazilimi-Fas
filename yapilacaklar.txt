@@ -1,19 +1,8 @@
-NOT:
--Mailler bazen buga giriyor öyle olunca env dosyasından çekme manuel olarak elle yaz daha sonra tekrar env ile yaz
--Twilio ile sms şeyini yaptım ama tekrar deneme sms yabancı geliyor paralı olabilir araştır
--Çeviriye yeni binalar eklenecekse ekle, yoksa son bir kez gözden geçir
 
-ÖNCELİKLİ YAPILACAKLAR: 
-1- Backend kodlarını düzenle klasor klasor
+3- /register ismi değiştirilecek 
 
-SMS İŞLERİ:
-1- Contact Sayfası iletişim formunun oluştuğuna dair bir sms gelsin sonrasında maili kontrol et desin
-2- Admin-Panel sayfası sms ile iletişim
-3- DUYURU KISMI sms
 
-ÖNCELİKLİ OLMAYAN İŞLER:
-1- TUĞBERK ABININ YAPTIGI BOXLARDAN FRONTEND KISMINA YERLEŞTİR(şimdilik yapıldı yeni gelen şeylere eklenmeli)
-2- ODEME SAYFASI
-
+Yunus abiye şunu sor bina adları kısmında bina adı gözükmeden nasıl admin yapılır örneğin benim bir binam olmasın ama admin olayım
+(BinaA,BinaB,BinaC oluşturulup gizlendi çözüm örneği)
 
 

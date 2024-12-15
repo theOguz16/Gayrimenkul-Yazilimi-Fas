@@ -4,8 +4,8 @@
     "register": "Register!",
     "password": "Password",
     "login_text": "Do you have an account?",
-    "select_building": "Select Building",
-    "please_select_build": "Please select a building",
+    "select_building": "Select Apartment",
+    "please_select_build": "Please select a apartment",
     "phone_number": "Phone Number",
     "mail_address": "E-Mail Address",
     "please_select_gender": "Please select a gender",
@@ -18,7 +18,7 @@
     "dues_date": "Dues Date",
     "rent_amount": "Rent Amount",
     "dues_amount": "Dues Amount",
-    "build_list": "Build List",
+    "build_list": "Apartment List",
     "select_subject": "Please select a subject",
     "msg": "Your Message"
   },
@@ -57,9 +57,9 @@
     "change_color": "Color change operation successful."
   },
   "buildpanel": {
-    "build_info_panel": "Building Information Panel",
-    "build_name": "Build Name",
-    "build_owner": "Build Owner",
+    "build_info_panel": "Apartments Information Panel",
+    "build_name": "Apartment Name",
+    "build_owner": "Apartment Owner",
     "sms_rent_msg": "Remind about rent via SMS",
     "mail_rent_msg": "Remind about rent via E-Mail",
     "sms_dues_msg": "Remind about dues via SMS",
@@ -74,7 +74,7 @@
     "header": "Announcement Title",
     "explain": "Announcement Explanation",
     "type": "Select Alert Type",
-    "members": "Building Members Who Need to Be Warned",
+    "members": "Apartments Members Who Need to Be Warned",
     "create": "Create Announcement"
   },
   "contact": {

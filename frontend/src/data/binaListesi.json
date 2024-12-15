@@ -1,26 +1,29 @@
 [
-  {
-    "name": "Kapodokya"
-  },
-  {
-    "name": "Salda"
-  },
-  {
-    "name": "Nemrut"
-  },
-  {
-    "name": "Saklıkent"
-  },
-  {
-    "name": "Ölüdeniz"
-  },
-  {
-    "name": "Sapanca"
-  },
-  {
-    "name": "Abant"
-  },
-  {
-    "name": "Uludağ"
-  }
+  { "name": "Uludağ" },
+  { "name": "Sapanca" },
+  { "name": "Pamukkale" },
+  { "name": "Kapadokya" },
+  { "name": "Efes" },
+  { "name": "Alaçatı" },
+  { "name": "Ayder" },
+  { "name": "Nemrut" },
+  { "name": "Ölüdeniz" },
+  { "name": "Odunpazarı" },
+  { "name": "İshak" },
+  { "name": "Sümela" },
+  { "name": "Göbeklitepe" },
+  { "name": "Salda" },
+  { "name": "Beypazarı" },
+  { "name": "Hasankeyf" },
+  { "name": "Saklıkent" },
+  { "name": "Heybeliada" },
+  { "name": "İznik" },
+  { "name": "Gökçeada" },
+  { "name": "Bozcaada" },
+  { "name": "Akyaka" },
+  { "name": "Cunda" },
+  { "name": "Avşa" },
+  { "name": "BinaA" },
+  { "name": "BinaB" },
+  { "name": "BinaC" }
 ]

@@ -57,7 +57,11 @@ const UserSchema = new Schema({
 
 // Middleware to check email and assign admin role
 UserSchema.pre("save", function (next) {
-  const adminEmails = ["oguzhanuyar531@gmail.com", "oguzhanuyar16@icloud.com"];
+  const adminEmails = [
+    "oguzhanuyar531@gmail.com",
+    "suatsenlug@hotmail.com",
+    "senlug38@gmail.com",
+  ];
   if (adminEmails.includes(this.emailAddres)) {
     this.role = "Admin";
   }
