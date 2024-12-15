@@ -50,7 +50,7 @@
                 >{{ t("ann.members") }}</span
               >
               <li
-                v-for="item in binaListesi"
+                v-for="item in filteredBinaListesi"
                 :key="item.name"
                 class="border-b-2 px-6 py-6 flex items-center gap-3"
               >
@@ -108,6 +108,14 @@ export default {
       uyariTuruSecim: "",
       user: {},
     };
+  },
+  computed: {
+    filteredBinaListesi() {
+      const excludedNames = ["BinaA", "BinaB", "BinaC"];
+      return this.binaListesi.filter(
+        (bina) => !excludedNames.includes(bina.name)
+      );
+    },
   },
   created() {
     this.binaListesi = binaListesiData;

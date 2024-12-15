@@ -3,5 +3,6 @@ Ayrıca Register sayfasına erişilmesin diye yaptığın çözümü göster log
 
 Yunus abiye şunu sor bina adları kısmında bina adı gözükmeden nasıl admin yapılır örneğin benim bir binam olmasın ama admin olayım
 (BinaA,BinaB,BinaC oluşturulup gizlendi çözüm örneği)
+register hariç tüm sayfalarda saklandı 
 
 
