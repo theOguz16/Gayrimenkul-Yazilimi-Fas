@@ -62,7 +62,7 @@
                 </RouterLink>
                 <RouterLink
                   class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
-                  to="/register161224"
+                  to="/register"
                 >
                   {{ t("menu.register") }}
                 </RouterLink>
