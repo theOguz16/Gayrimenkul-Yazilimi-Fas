@@ -18,14 +18,7 @@ export default {
       user: {},
     };
   },
-  computed: {
-    filteredBinaListesi() {
-      const excludedNames = ["BinaA", "BinaB", "BinaC"];
-      return this.binaListesi.filter(
-        (bina) => !excludedNames.includes(bina.name)
-      );
-    },
-  },
+
   created() {
     this.binaListesi = binaListesiData; // JSON verisini burada atıyoruz
   },
@@ -73,7 +66,7 @@ export default {
           </div>
           <div>
             <InputSelect
-              :items="filteredBinaListesi"
+              :items="binaListesi"
               itemKey="buildName"
               itemValue="name"
               :label="t('user.select_building')"
