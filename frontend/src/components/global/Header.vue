@@ -60,7 +60,7 @@
                 >
                   {{ t("menu.announcement") }}
                 </RouterLink>
-                <RouterLink
+                <!-- <RouterLink
                   class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/register17122024"
                 >
@@ -71,7 +71,7 @@
                   to="/login"
                 >
                   {{ t("menu.login") }}
-                </RouterLink>
+                </RouterLink> -->
                 <RouterLink
                   @click="logout"
                   class="flex items-center w-[172px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
@@ -135,12 +135,12 @@
                 >
                   {{ t("menu.contact") }}
                 </RouterLink>
-                <RouterLink
+                <!-- <RouterLink
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
                   to="/login"
                 >
                   {{ t("menu.login") }}
-                </RouterLink>
+                </RouterLink> -->
                 <RouterLink
                   @click="logout"
                   class="flex items-center w-[165px] gap-x-3.5 py-2 px-3 text-sm text-white border-b-2 border-white transition-all hover:border-none"
