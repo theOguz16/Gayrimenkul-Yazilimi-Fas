@@ -1,9 +1,11 @@
- login olmadıgın için token olmuyo bu yüzden sayfayı gizleyemiyorum register sayfasının adını mı değiştireyim
+login olmadıgın için token olmuyo bu yüzden sayfayı gizleyemiyorum register sayfasının adını mı değiştireyim örn register171224
 
 Yunus abiye şunu sor bina adları kısmında bina adı gözükmeden nasıl admin yapılır örneğin benim bir binam olmasın ama admin olayım
 (BinaA,BinaB,BinaC oluşturulup gizlendi çözüm örneği)
 register hariç tüm sayfalarda saklandı 
 
 duyurular sayfasına gitmiyor
+
+Localde nasıl db ye bakacağımı sor tekrar
 
 

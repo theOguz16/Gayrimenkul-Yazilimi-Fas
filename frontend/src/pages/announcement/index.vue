@@ -170,7 +170,7 @@ export default {
       // Gelen kullanıcı bilgilerini state'e atıyoruz
       this.user = response.data.user;
       // Kullanıcı rolünü kontrol et
-      if (this.user.role === "Admin") {
+      if (this.user.role === "User") {
         this.$router.push("/admin-panel");
       }
     } catch (error) {

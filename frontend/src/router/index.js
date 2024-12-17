@@ -10,7 +10,7 @@ const router = createRouter({
 // Oturum açıkken belirli sayfalara erişimi engellemek için oturum kontrolü yapın
 router.beforeEach(async (to, from, next) => {
   const isAuthenticated = checkIfTokenExists(); // Oturum açık mı kontrolü
-  const allowedRoutes = ["login", "register"]; // İzin verilen sayfa adları
+  const allowedRoutes = ["login", "register17122024"]; // İzin verilen sayfa adları
 
   if (!isAuthenticated) {
     // Oturum açık değilse
