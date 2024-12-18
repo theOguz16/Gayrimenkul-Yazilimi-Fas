@@ -6,4 +6,3 @@ register hariç tüm sayfalarda saklandı ama login olurken nasıl olacak ?
 
 Localde nasıl db ye bakacağımı sor tekrar
 
-push atınca menüde hem user hem adminde login register siliniyor
